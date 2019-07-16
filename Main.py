@@ -1,19 +1,19 @@
-
 # -*- coding: utf-8 -*-
 from utils import *
 
 
 # Dominio del Modelo - Vestidos
 
-vestido = ConcreteModel()
-vestido.i = Set(initialize=['Q','R','S','T'], doc='Fabricante')
-vestido.j = Set(initialize=['A','B','C','D','E'], doc='Modelo')
+modelo = ConcreteModel()
+modelo.i = Set(initialize=['Q','R','S','T'], doc='Fabricante')
+modelo.j = Set(initialize=['A','B','C','D','E'], doc='Modelo')
 
 
 #Vectores
 
-vestido.Disp = Param(vestido.i, initialize={'Q':325,'R':300,'S':275,'T':275},doc='Fabricantes cuyas disponibilidades Disp(j)')
-vestido.Cant = Param(vestido.j, initialize={'A':150,'B':100,'C':75,'D':250,'E':200}, doc='Demandas mÃ­nimas de vestidos de mujer Cant(i)')
+modelo.Disp = Param(modelo.i, initialize={'Q':325,'R':300,'S':275,'T':275},doc='Fabricantes cuyas disponibilidades Disp(j)')
+
+modelo.Cant = Param(modelo.j, initialize={'A':150,'B':100,'C':75,'D':250,'E':200}, doc='Demandas mÃ­nimas de vestidos de mujer Cant(i)')
 
 #Matriz
 
@@ -43,41 +43,43 @@ tablac = {
 ('T', 'E'): 27,
  }
 
-vestido.C = Param(vestido.i, vestido.j, initialize=tablac, doc='Utilidades (Uij) por vestido varÃ­an de acuerdo con cada fabricante')
+modelo.C = Param(modelo.i, modelo.j, initialize=tablac, doc='Utilidades (Uij) por modelo varÃ­an de acuerdo con cada fabricante')
 
 
 #V.Decision:
 
-vestido.x = Var(vestido.i, vestido.j, bounds=(0.0,None), doc='Cantidad de vestidos modelo i comprados a tienda j')
+modelo.x = Var(modelo.i, modelo.j, bounds=(0.0,None), doc='Cantidad de modelos modelo i comprados a tienda j')
+
+
+
 
 # s.a: - Restricciones:
 
-def supply_rule(vestido, i):
- return sum(vestido.x[i,j] for j in vestido.j) <= vestido.Disp[i]
+def supply_rule(modelo, i):
+ return sum(modelo.x[i,j] for j in modelo.j) <= modelo.Disp[i]
 
-vestido.supply = Constraint(vestido.i, rule=supply_rule, doc='No exceder la capacidad de cada fabricante i')
+modelo.supply = Constraint(modelo.i, rule=supply_rule, doc='No exceder la capacidad de cada fabricante i')
 
-def demand_rule(vestido, j):
- return sum(vestido.x[i,j] for i in vestido.i) >= vestido.Cant[j]
+def demand_rule(modelo, j):
+ return sum(modelo.x[i,j] for i in modelo.i) >= modelo.Cant[j]
 
-vestido.demand = Constraint(vestido.j, rule=demand_rule, doc='Satisfacer la demanda de cada modelo j')
+modelo.demand = Constraint(modelo.j, rule=demand_rule, doc='Satisfacer la demanda de cada modelo j')
 
 
 #Funcion Objetivo:
 
-def objective_rule(vestido):
- return sum(vestido.C[i,j]*vestido.x[i,j] for i in vestido.i for j in vestido.j)
+def objective_rule(modelo):
+ return sum(modelo.C[i,j]*modelo.x[i,j] for i in modelo.i for j in modelo.j)
 
-vestido.objective = Objective(rule=objective_rule, sense=maximize, doc='FunciÃ³n objetivo')
+modelo.objective = Objective(rule=objective_rule, sense=maximize, doc='FunciÃ³n objetivo')
 
 
 # Funcion para llamar al solucionador de problema (NEOS)
 
-instance = vestido
-opt = SolverFactory("cbc")
+instance = modelo
+opt = SolverFactory("cplex") #cbc
 solver_manager = SolverManagerFactory('neos')
 results = solver_manager.solve(instance, opt=opt)
 results.write()
-vestido.x.display()
-vestido.objective.display()
-
+modelo.x.display()
+modelo.objective.display()
