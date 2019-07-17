@@ -42,10 +42,10 @@ mdcd = pd.DataFrame(distance_matrix(dfc.values, dfd.values), index=data_clientes
 cfv =  2428.90 # Costo fijo de los vehiculos. ejemplo : $ 5'400.000 pesos colombianos -> Dolar Australiano como es flota homogenea corresponde al mismo
 
 # Lista de costo por kilometro de los vehiculos.
-ckv =  0.03 # Costo por kilometro de los vehiculos como es flota homogenea corresponde al mismo.
+ckv =   0.03 # Costo por kilometro de los vehiculos como es flota homogenea corresponde al mismo.
 
 # Lista del factor de velocidad de los vehiculos.
-fvv =  109 # Factor de velocidad de los vehiculos 109 Km/h -> 2600 RPM.como es flota homogenea corresponde al mismo.
+fvv = 109 # Factor de velocidad de los vehiculos 109 Km/h -> 2600 RPM.como es flota homogenea corresponde al mismo.
 
 # Lista de matrices de costo en funcion de la distancia recorrida
 # para cada vehiculo V para viajar de cliente a cliente.
@@ -83,7 +83,7 @@ modelo.k = Set(initialize=['1','2','3','4','5','6','7','8','9','10'], doc='Vehic
 # N Número de vehículos
 # Cij Costos entre los nodos i y j
 # Wi Capacidad del depósito
-# di Demanda del cliente j
+# Di Demanda del cliente j
 # Qk Capacidad del vehículo (ruta) k
 # l cardinalidad de los depositos.
 # m cardinalidad del conjunto de vehiculos.
@@ -116,5 +116,14 @@ def objective_rule(modelo):
 modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³n objetivo')
 
 
+# Funcion para llamar al solucionador de problema (NEOS)
+
+instance = modelo
+opt = SolverFactory("cplex") #cbc
+solver_manager = SolverManagerFactory('neos')
+results = solver_manager.solve(instance, opt=opt)
+results.write()
+modelo.x.display()
+modelo.objective.display()
 
 
