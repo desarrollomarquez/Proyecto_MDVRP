@@ -38,39 +38,32 @@ dfd  = pd.DataFrame(data_depositos[['x coordinate', 'y coordinate']].values, col
 mdcd = pd.DataFrame(distance_matrix(dfc.values, dfd.values), index=data_clientes['Cliente'], columns=data_depositos['Deposito'])
 
 # PARAMETROS GENERALES DEL P.L.
-# Lista de costo fijo de los vehiculos.
-cfv     =   [2428.90, 2428.90, 2428.90, 2428.90, 2428.90, 2428.90, 2428.90, 2428.90, 2428.90, 2428.90] # Se crea vector de costo fijo de los vehiculos. ejemplo : $ 5'400.000 pesos colombianos -> Dolar Australiano
+# Costo fijo de los vehiculos.
+cfv =  2428.90 # Costo fijo de los vehiculos. ejemplo : $ 5'400.000 pesos colombianos -> Dolar Australiano como es flota homogenea corresponde al mismo
 
 # Lista de costo por kilometro de los vehiculos.
-ckv     =   [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03 ] # Se crea vector de costo por kilometro de los vehiculos.
+ckv =  0.03 # Costo por kilometro de los vehiculos como es flota homogenea corresponde al mismo.
 
 # Lista del factor de velocidad de los vehiculos.
-fvv     =   [109, 109, 109, 109, 109, 109, 109, 109, 109, 109 ] # Se crea vector de factor de velocidad de los vehiculos 109 Km/h -> 2600 RPM.
+fvv =  109 # Factor de velocidad de los vehiculos 109 Km/h -> 2600 RPM.como es flota homogenea corresponde al mismo.
 
 # Lista de matrices de costo en funcion de la distancia recorrida
 # para cada vehiculo V para viajar de cliente a cliente.
-for i in range (len(ckv)):
-    mdcc_ckv = pd.DataFrame(mdcc * ckv[i] )
-# Lista de matrices de costo en funcion de la distancia recorrida
-# para cada vehiculo V para viajar de deposito a cliente.
-for i in range (len(ckv)):
-    mddc_ckv = pd.DataFrame(mddc * ckv[i] )
-# Lista de matrices de costo en funcion de la distancia recorrida
-# para cada vehiculo V para viajar de cliente a deposito.
-for i in range (len(ckv)):
-    mdcd_ckv = pd.DataFrame(mdcd * ckv[i] )
-
-
+mdcc_ckv = pd.DataFrame(mdcc * ckv )
+# Lista de matrices de costo en funcion de la distancia recorrida para cada vehiculo V para viajar de deposito a cliente.
+mddc_ckv = pd.DataFrame(mddc * ckv )
+# Lista de matrices de costo en funcion de la distancia recorrida  para cada vehiculo V para viajar de cliente a deposito.
+mdcd_ckv = pd.DataFrame(mdcd * ckv )
+# Capacidad del Deposito para almacenar en metros cuadrados
 capacity_d = data_depositos['Capacity'].values
+# Demanda de cada cliente
 demanda =  data_clientes['Demanda'].values
+# Capacidad Carga de cada vehiculo
 capacity_v =  data_vehiculos['GVM Weight'].values
-
-
-#X = np.array(list(zip(c_latitud[0:50], c_longitud[0:50])))
-#Y = np.array(list(zip(d_latitud,d_longitud)))
 
 H = []
 [H.append(p) for p in range(1, len(data_clientes)+1)]
+
 #W = range(1, len(X)-1)
 
 # Dominio del Modelo - MDVRP
@@ -118,8 +111,10 @@ modelo.u = Var(modelo.i, modelo.j, within= Binary, bounds=(0.0,None), doc='Varia
 #Funcion Objetivo:
 
 def objective_rule(modelo):
- return sum(modelo.C[i,j]*modelo.x[i,j] for i in modelo.i for j in modelo.j)
+ return sum(cfv*modelo.x[i,j,k] for i in modelo.i for j in modelo.j for k in modelo.k)
 
 modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³n objetivo')
+
+
 
 
