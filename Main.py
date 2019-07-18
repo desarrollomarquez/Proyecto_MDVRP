@@ -108,6 +108,16 @@ modelo.z = Var(modelo.i, modelo.j, within= Binary, bounds=(0.0,None), doc='Varia
 modelo.u = Var(modelo.i, modelo.j, within= Binary, bounds=(0.0,None), doc='Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k.')
 
 
+
+# s.a: - Restricciones:
+
+def supply_rule(modelo, i):
+ return sum(modelo.x[i,j] for j in modelo.j) <= modelo.d[i]
+
+modelo.supply = Constraint(modelo.i, rule=supply_rule, doc='No exceder la capacidad de cada fabricante i')
+
+
+
 #Funcion Objetivo:
 
 def objective_rule(modelo):
@@ -116,14 +126,18 @@ def objective_rule(modelo):
 modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³n objetivo')
 
 
+
 # Funcion para llamar al solucionador de problema (NEOS)
 
 instance = modelo
-opt = SolverFactory("cplex") #cbc
+opt = SolverFactory("cbc") #cbc -cplex
 solver_manager = SolverManagerFactory('neos')
 results = solver_manager.solve(instance, opt=opt)
 results.write()
 modelo.x.display()
 modelo.objective.display()
+
+
+
 
 
