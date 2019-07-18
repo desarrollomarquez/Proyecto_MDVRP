@@ -112,10 +112,14 @@ modelo.u = Var(modelo.i, modelo.j, within= Binary, bounds=(0.0,None), doc='Varia
 # s.a: - Restricciones:
 
 def supply_rule(modelo, i):
- return sum(modelo.x[i,j] for j in modelo.j) <= modelo.d[i]
+ return sum(modelo.x[i,j] for j in modelo.j) <= modelo.w[i]
 
 modelo.supply = Constraint(modelo.i, rule=supply_rule, doc='No exceder la capacidad de cada fabricante i')
 
+def demand_rule(modelo, j):
+ return sum(modelo.x[i,j] for i in modelo.i) >= modelo.d[j]
+
+modelo.demand = Constraint(modelo.j, rule=demand_rule, doc='Satisfacer la demanda de cada modelo j')
 
 
 #Funcion Objetivo:
@@ -136,6 +140,8 @@ results = solver_manager.solve(instance, opt=opt)
 results.write()
 modelo.x.display()
 modelo.objective.display()
+
+
 
 
 
