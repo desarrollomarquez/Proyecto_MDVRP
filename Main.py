@@ -113,15 +113,15 @@ modelo.u = Var(modelo.j, modelo.k, within= NonNegativeReals, bounds=(0.0,None), 
 
 # s.a: - Restricciones:
 
-def supply_rule(modelo, i):
+def X_i_j_k_rule(modelo, i):
  return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) == 1
 
-modelo.supply = Constraint(modelo.i, rule=supply_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
+modelo.X_i_j_k = Constraint(modelo.i, rule=X_i_j_k_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
 
-#def supply_rule(modelo, i):
-# return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= modelo.u
+def Q_k_rule(modelo, i):
+ return sum(modelo.d[j]*modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= (modelo.u[k] for k in modelo.k)
 
-#modelo.supply = Constraint(modelo.x, rule=supply_rule, doc='Capacidad del conjunto de vehiculos K')
+modelo.Q_k = Constraint(modelo.i, rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
 
 
 
@@ -135,9 +135,11 @@ modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³
 
 
 
-#for j in modelo.j:
- # print(j)
+#for j in modelo.u:
+# print(j)
  # print("\n")
+
+
 
 
 
