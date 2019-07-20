@@ -95,6 +95,8 @@ modelo.w = Param(modelo.i, initialize=capacity_d, doc='Capacidad del depósito (
 modelo.d = Param(modelo.j, initialize=demanda, doc='Demanda del cliente (Dj)')
 modelo.q = Param(modelo.k, initialize=capacity_v, doc='Capacidad del Vehiculo (Qk)')
 
+
+
 #V.Decision:
 
 # Xijk : Variable binaria que indica que el nodo i precede al nodo j en la ruta k. 
@@ -105,7 +107,7 @@ modelo.x = Var(modelo.i, modelo.j, modelo.k, within= Binary, bounds=(0.0,None), 
 
 modelo.z = Var(modelo.i, modelo.j, within= Binary, bounds=(0.0,None), doc='Variable binaria que define si el consumidor ubicado en el nodo j es atendido por el centro de distribución i.')
 
-modelo.u = Var(modelo.i, modelo.j, within= Binary, bounds=(0.0,None), doc='Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k.')
+modelo.u = Var(modelo.j, modelo.k, within= NonNegativeReals, bounds=(0.0,None), doc='Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k.')
 
 
 
@@ -114,7 +116,13 @@ modelo.u = Var(modelo.i, modelo.j, within= Binary, bounds=(0.0,None), doc='Varia
 def supply_rule(modelo, i):
  return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) == 1
 
-modelo.supply = Constraint(modelo.i, rule=supply_rule, doc='Cada cliente j debe ser asiganado a un vehiculo K')
+modelo.supply = Constraint(modelo.i, rule=supply_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
+
+#def supply_rule(modelo, i):
+# return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= modelo.u
+
+#modelo.supply = Constraint(modelo.x, rule=supply_rule, doc='Capacidad del conjunto de vehiculos K')
+
 
 
 
@@ -127,17 +135,9 @@ modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³
 
 
 
-# Funcion para llamar al solucionador de problema (NEOS)
-
-instance = modelo
-opt = SolverFactory("cbc") #cbc -cplex
-solver_manager = SolverManagerFactory('neos')
-results = solver_manager.solve(instance, opt=opt)
-results.write()
-modelo.x.display()
-modelo.objective.display()
-
-
+#for j in modelo.j:
+ # print(j)
+ # print("\n")
 
 
 
