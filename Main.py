@@ -65,13 +65,16 @@ modelo.u = Var(modelo.j, modelo.k, within= NonNegativeReals, bounds=(0.0,None), 
 
 
 
-
 # s.a: - Restricciones:
 
-def X_i_j_k_rule(modelo, i):
+def X_ijk_rule(modelo, i):
  return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) == 1
+modelo.X_ijk = Constraint(modelo.i, rule=X_ijk_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
 
-modelo.X_i_j_k = Constraint(modelo.i, rule=X_i_j_k_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
+
+def X_ijk_X_jik_rule(modelo, i):
+ return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k ) - sum(modelo.xx[j,i,k] for j in modelo.j for k in modelo.k ) == 0
+modelo.X_ijk_X_jik_rule = Constraint(modelo.i,  rule=X_ijk_X_jik_rule , doc='Conservacion de Flujos')
 
 
 
