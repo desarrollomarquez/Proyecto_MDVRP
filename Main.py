@@ -124,6 +124,11 @@ def Q_k_rule(modelo, i):
 modelo.Q_k = Constraint(modelo.i, rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
 
 
+def Q_k_rule(modelo, i):
+ return sum(modelo.d[j]*modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= (modelo.u[k] for k in modelo.k)
+
+modelo.Q_k = Constraint(modelo.i, rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
+
 
 
 #Funcion Objetivo:
