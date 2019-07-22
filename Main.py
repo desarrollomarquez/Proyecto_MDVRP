@@ -61,8 +61,15 @@ demanda =  data_clientes['Demanda'].values
 # Capacidad Carga de cada vehiculo
 capacity_v =  data_vehiculos['GVM Weight'].values
 
-H = []
-[H.append(p) for p in range(1, len(data_clientes)+1)]
+d = []
+[d.append(p) for p in range(1, len(data_depositos)+1)]
+
+c = []
+[c.append(p) for p in range(1, len(data_clientes)+1)]
+
+v = []
+[v.append(p) for p in range(1, len(data_vehiculos)+1)]
+
 
 #W = range(1, len(X)-1)
 
@@ -75,7 +82,7 @@ H = []
 
 modelo = ConcreteModel()
 modelo.i = Set(initialize=['D1','D2','D3','D4','D5','D6','D7','D8','D9','D10'], doc='Deposito')
-modelo.j = Set(initialize=H, doc='Cliente')
+modelo.j = Set(initialize=c, doc='Cliente')
 modelo.k = Set(initialize=['1','2','3','4','5','6','7','8','9','10'], doc='Vehiculo')
 
 # Parametros:
@@ -118,23 +125,11 @@ def X_i_j_k_rule(modelo, i):
 
 modelo.X_i_j_k = Constraint(modelo.i, rule=X_i_j_k_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
 
-def Q_k_rule(modelo, i):
- return sum(modelo.d[j]*modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= (modelo.u[k] for k in modelo.k)
-
-modelo.Q_k = Constraint(modelo.i, rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
 
 def X_ijk_X_jik_rule(modelo, i):
- return sum(modelo.d[j]*modelo.x[i,j,k] for j in modelo.j for k in modelo.k) == 0
+ return (sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) - sum(modelo.x[j,i,k] for j in modelo.j for k in modelo.k)) == 0
 
 modelo.X_ijk_X_jik = Constraint(modelo.i, rule=X_ijk_X_jik_rule, doc='Conservacion de Flujos')
-
-def X_i_j_k_1_rule(modelo, i):
- return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= 1
-
-modelo.X_i_j_k_1 = Constraint(modelo.i, rule=X_i_j_k_1_rule, doc='Garantiza que cada vehiculo atienda almenos una unica ruta')
-
-
-
 
 
 
@@ -151,6 +146,7 @@ modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³
 #for j in modelo.u:
 # print(j)
  # print("\n")
+
 
 
 
