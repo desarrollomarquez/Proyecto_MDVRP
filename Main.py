@@ -123,11 +123,19 @@ def Q_k_rule(modelo, i):
 
 modelo.Q_k = Constraint(modelo.i, rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
 
+def X_ijk_X_jik_rule(modelo, i):
+ return sum(modelo.d[j]*modelo.x[i,j,k] for j in modelo.j for k in modelo.k) == 0
 
-def Q_k_rule(modelo, i):
- return sum(modelo.d[j]*modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= (modelo.u[k] for k in modelo.k)
+modelo.X_ijk_X_jik = Constraint(modelo.i, rule=X_ijk_X_jik_rule, doc='Conservacion de Flujos')
 
-modelo.Q_k = Constraint(modelo.i, rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
+def X_i_j_k_1_rule(modelo, i):
+ return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= 1
+
+modelo.X_i_j_k_1 = Constraint(modelo.i, rule=X_i_j_k_1_rule, doc='Garantiza que cada vehiculo atienda almenos una unica ruta')
+
+
+
+
 
 
 
@@ -143,8 +151,6 @@ modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³
 #for j in modelo.u:
 # print(j)
  # print("\n")
-
-
 
 
 
