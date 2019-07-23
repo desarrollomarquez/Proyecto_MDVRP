@@ -94,9 +94,9 @@ def X_ijk_rule(modelo, i):
 modelo.X_ijk = Constraint(modelo.i, rule=X_ijk_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
 
 
-#def Q_k_rule(modelo, i, D ):
-# return sum(D[j]*modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= (modelo.u[k] for k in modelo.k)
-#modelo.Q_k = Constraint(modelo.i, D, rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
+#def Q_k_rule(modelo, i ):
+# return sum(D[j] for j in modelo.j)*sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= Q[k]
+#modelo.Q_k = Constraint(modelo.i, rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
 
 
 def X_ijk_X_jik_rule(modelo, i):
@@ -108,11 +108,8 @@ def X_ijk__rule(modelo, i):
 modelo.X_ijk__ = Constraint(modelo.i, rule=X_ijk__rule, doc='Garantiza que cada vehiculo atienda almenos una unica ruta')
 
 def W_i_rule(modelo, i ):
- return sum(D[i]*modelo.z[i,j] for j in modelo.j ) <= W[i]
+ return (D[j] for j in modelo.j)*sum(modelo.z[i,j] for j in modelo.j)  <= W[i] 
 modelo.W_i = Constraint(modelo.i, rule=W_i_rule, doc='Capacidad de los depositos')
-
-
-
 
 #Funcion Objetivo:
 
