@@ -62,8 +62,9 @@ modelo.xx = Var(modelo.j, modelo.i, modelo.k, within= Binary, bounds=(0.0,None),
 
 modelo.z = Var(modelo.i, modelo.j, within= Binary, bounds=(0.0,None), doc='Variable binaria que define si el consumidor ubicado en el nodo j es atendido por el centro de distribución i.')
 
-modelo.u = Var(modelo.j, modelo.k, within= NonNegativeReals, bounds=(0.0,None), doc='Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k.')
+modelo.ui = Var(modelo.i, modelo.k, within= NonNegativeReals, bounds=(0.0,None), doc='Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k para i.')
 
+modelo.uj = Var(modelo.j, modelo.k, within= NonNegativeReals, bounds=(0.0,None), doc='Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k para j.')
 
 
 # s.a: - Restricciones:
