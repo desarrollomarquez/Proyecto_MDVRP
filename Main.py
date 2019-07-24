@@ -33,9 +33,9 @@ modelo.k = Set(initialize=v, doc='Vehiculo')
 # Di Demanda del cliente j
 # Qk Capacidad del vehículo (ruta) k
 
-modelo.w = Var(W)
-modelo.d = Var(D)
-modelo.q = Param(modelo.k, initialize=lambda modelo, k: Q[k])
+modelo.w = Param(modelo.i, initialize=lambda modelo, i: W[i-1])
+modelo.d = Param(modelo.j, initialize=lambda modelo, j: D[j-1])
+modelo.q = Param(modelo.k, initialize=lambda modelo, k: Q[k-1])
 
 
 print("-------------Depositos-----------------")
