@@ -57,3 +57,34 @@ capacity_d = data_depositos['Capacity'].values
 demanda =  data_clientes['Demanda'].values
 # Capacidad Carga de cada vehiculo
 capacity_v =  data_vehiculos['GVM Weight'].values
+
+
+
+d = []
+[d.append(p) for p in range(1, len(data_depositos)+1)]
+c = []
+[c.append(p) for p in range(1, len(data_clientes)+1)]
+v = []
+[v.append(p) for p in range(1, len(data_vehiculos)+1)]
+
+# Capacidad del depósito (Wi)
+W = []
+[W.append(p) for p in capacity_d]
+# Demanda del cliente (Dj)
+D = []
+[D.append(p) for p in demanda]
+# Capacidad del Vehiculo (Qk)
+Q = []
+[Q.append(p) for p in capacity_v]
+
+l = len(d)
+n = len(c) 
+m = len(v)
+
+print("------ tamaño vectores ----------")
+print(l,"-> Depositos")
+print("\n")
+print(n,"-> Clientes")
+print("\n") 
+print(m,"-> Vehiculos")
+print("\n")
