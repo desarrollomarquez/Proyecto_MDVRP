@@ -77,14 +77,15 @@ D = []
 Q = []
 [Q.append(p) for p in capacity_v]
 
-l = len(d)
-n = len(c) 
-m = len(v)
+L = len(d)
+C = len(c) 
+N = len(v)
 
 print("------ tamaño vectores ----------")
-print(l,"-> Depositos")
+print(L,"-> Depositos")
 print("\n")
-print(n,"-> Clientes")
+print(C,"-> Clientes")
 print("\n") 
-print(m,"-> Vehiculos")
+print(N,"-> Vehiculos")
 print("\n")
+
