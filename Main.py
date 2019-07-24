@@ -73,9 +73,9 @@ def X_ijk_rule(modelo, i):
 modelo.X_ijk = Constraint(modelo.i, rule=X_ijk_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
 
 
-def Q_k_rule(modelo, i):
- return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= (modelo.q[k] for k in modelo.k)
-modelo.Q_k = Constraint(modelo.i, rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
+def Q_k_rule(modelo, i, k):
+ return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= modelo.q[k]
+modelo.Q_k = Constraint(modelo.i, modelo.k,  rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
 
 
 def X_ijk_X_jik_rule(modelo, i):
