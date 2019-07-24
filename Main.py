@@ -86,11 +86,10 @@ def X_ijk__rule(modelo, i):
  return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= 1
 modelo.X_ijk__ = Constraint(modelo.i, rule=X_ijk__rule, doc='Garantiza que cada vehiculo atienda almenos una unica ruta')
 
-#def W_i_rule(modelo, i , W):
-# return sum(modelo.z[i,j] for j in modelo.j)  <= sum(W[i])
-#modelo.W_i = Constraint(modelo.i, W,  rule=W_i_rule, doc='Capacidad de los depositos i')
+def W_i_rule(modelo, i):
+ return sum(modelo.d[i]*modelo.z[i,j] for j in modelo.j)  <= modelo.w[i]
+modelo.W_i = Constraint(modelo.i, rule=W_i_rule, doc='Capacidad del conjunto de depositos i')
 
-#(D[j] for j in modelo.j)*  W[i] 
 
 
 #Funcion Objetivo:
