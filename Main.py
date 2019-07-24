@@ -67,17 +67,16 @@ modelo.ui = Var(modelo.i, modelo.k, within= NonNegativeReals, bounds=(0.0,None),
 modelo.uj = Var(modelo.j, modelo.k, within= NonNegativeReals, bounds=(0.0,None), doc='Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k para j.')
 
 
+
 # s.a: - Restricciones:
 
 def X_ijk_rule(modelo, i):
  return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) == 1
 modelo.X_ijk = Constraint(modelo.i, rule=X_ijk_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
 
-
 def Q_k_rule(modelo, i, k):
  return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= modelo.q[k]
 modelo.Q_k = Constraint(modelo.i, modelo.k,  rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
-
 
 def X_ijk_X_jik_rule(modelo, i):
  return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k ) - sum(modelo.xx[j,i,k] for j in modelo.j for k in modelo.k ) == 0
@@ -90,6 +89,18 @@ modelo.X_ijk__ = Constraint(modelo.i, rule=X_ijk__rule, doc='Garantiza que cada 
 def W_i_rule(modelo, i):
  return sum(modelo.d[i]*modelo.z[i,j] for j in modelo.j)  <= modelo.w[i]
 modelo.W_i = Constraint(modelo.i, rule=W_i_rule, doc='Capacidad del conjunto de depositos i')
+
+
+def U_ij_rule(modelo, i, j, k):
+ return modelo.ui[i,k] - modelo.uj[j,k] + N*modelo.x[i,j,k] <= N-1
+modelo.U_ij = Constraint(modelo.i, modelo.j, modelo.k, rule=U_ij_rule, doc='Garantiza la eliminacion de SubTours')
+
+
+# Un cliente puede ser asignado al deposito, unicamente si hay una ruta que parte desde el mismo deposito y transita atravez del cliente.
+
+#def X_uk_rule(modelo, i):
+# return (-1*z[i,j] for j in modelo.j) + sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k)  <= 1
+#modelo.X_uk = Constraint(modelo.i, rule=X_uk_rule, doc='Garantiza asignacion de cliente j si transita por depositos i')
 
 
 
