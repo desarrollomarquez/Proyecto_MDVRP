@@ -98,9 +98,9 @@ modelo.U_ij = Constraint(modelo.i, modelo.j, modelo.k, rule=U_ij_rule, doc='Gara
 
 # Un cliente puede ser asignado al deposito, unicamente si hay una ruta que parte desde el mismo deposito y transita atravez del cliente.
 
-#def X_uk_rule(modelo, i):
-# return (-1*z[i,j] for j in modelo.j) + sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k)  <= 1
-#modelo.X_uk = Constraint(modelo.i, rule=X_uk_rule, doc='Garantiza asignacion de cliente j si transita por depositos i')
+def X_uk_rule(modelo, i, j, k):
+ return (-1*modelo.z[i,j] for j in modelo.j) + sum(modelo.x[i,u,k]+ modelo.x[u,j,k] for u in modelo.u)  <= 1
+modelo.X_uk = Constraint(modelo.i, modelo.j, modelo.k, rule=X_uk_rule, doc='Garantiza asignacion de cliente j si transita por depositos i')
 
 
 
