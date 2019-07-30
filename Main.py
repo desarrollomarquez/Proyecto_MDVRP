@@ -28,6 +28,7 @@ modelo = ConcreteModel()
 modelo.i = Set(initialize=d, doc='Deposito')
 modelo.j = Set(initialize=c, doc='Cliente')
 modelo.k = Set(initialize=v, doc='Vehiculo')
+modelo.u = Set(initialize=c, doc='Ruta Clientes')
 
 # Wi Capacidad del depósito
 # Di Demanda del cliente j
