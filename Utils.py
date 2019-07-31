@@ -5,7 +5,6 @@ from copy import deepcopy
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from scipy.spatial import distance_matrix
-from cvxopt import matrix, solvers, spdiag
 from sklearn.preprocessing import MinMaxScaler
 
 
@@ -13,9 +12,9 @@ col_clientes = ['Cliente','x coordinate','y coordinate', 'Demanda']
 col_depositos = ['Deposito','x coordinate','y coordinate','Capacity']
 col_vehiculos = ['Registration Category','Registration Term','Purpose of Use','Body Shape','Year of Manufacture','Make','Model','Colour','Fuel Type','Number of Cylinders','Number of Seats','ATM Weight','GCM Weight','GTM Weight','GVM Weight','TARE Weight','VIN Prefix']
 
-data_cl  = pd.read_csv("Customers.csv", sep=',', names=col_clientes, encoding='latin-1')
-data_de  = pd.read_csv("Deposits.csv", sep=',', names=col_depositos, encoding='latin-1')
-data_ve  = pd.read_csv("Vehicles.csv", sep=',', names=col_vehiculos,  encoding='latin-1')
+data_cl  = pd.read_csv("/home/diego/Documentos/Proyecto_MDVRP/Data_Source/Customers.csv", sep=',', names=col_clientes, encoding='latin-1')
+data_de  = pd.read_csv("/home/diego/Documentos/Proyecto_MDVRP/Data_Source/Deposits.csv", sep=',', names=col_depositos, encoding='latin-1')
+data_ve  = pd.read_csv("/home/diego/Documentos/Proyecto_MDVRP/Data_Source/Vehicles.csv", sep=',', names=col_vehiculos,  encoding='latin-1')
 
 data_clientes  = data_cl[0:300]
 data_depositos = data_de

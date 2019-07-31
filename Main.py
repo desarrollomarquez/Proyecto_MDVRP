@@ -6,6 +6,7 @@ from Utils import *
 
 
 
+
 # Dominio del Modelo - MDVRP
 
 modelo = ConcreteModel()
@@ -119,9 +120,9 @@ modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³
 
 
 
-#for a in modelo.x:
-#  print(a)
- # print("\n")
+for a in modelo.x:
+  print(a)
+  print("\n")
 
 
 
