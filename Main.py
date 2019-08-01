@@ -119,12 +119,3 @@ modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³
 
 
 
-
-for a in modelo.x:
-  print(a)
-  print("\n")
-
-
-
-
-
