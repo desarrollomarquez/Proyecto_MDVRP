@@ -5,13 +5,9 @@ from pyomo.environ import *
 from Utils import *
 
 
-
-
 # Dominio del Modelo - MDVRP
 
 modelo = ConcreteModel()
-
-
 
 # Parametros:
 
@@ -96,7 +92,6 @@ def W_i_rule(modelo, i):
  return sum(modelo.d[i]*modelo.z[i,j] for j in modelo.j)  <= modelo.w[i]
 modelo.W_i = Constraint(modelo.i, rule=W_i_rule, doc='Capacidad del conjunto de depositos i')
 
-
 def U_ij_rule(modelo, i, j, k):
  return modelo.ui[i,k] - modelo.uj[j,k] + N*modelo.x[i,j,k] <= N-1
 modelo.U_ij = Constraint(modelo.i, modelo.j, modelo.k, rule=U_ij_rule, doc='Garantiza la eliminacion de SubTours')
@@ -106,6 +101,7 @@ modelo.U_ij = Constraint(modelo.i, modelo.j, modelo.k, rule=U_ij_rule, doc='Gara
 def X_uk_rule(modelo, i, j):
  return  sum(modelo.ux[i,u,k] + modelo.xu[u,j,k] for j in modelo.j for k in modelo.k for u in modelo.u)  - modelo.z[i,j] <= 1 
 modelo.X_uk = Constraint(modelo.i, modelo.j, rule=X_uk_rule, doc='Garantiza asignacion de cliente j si transita por depositos i')
+
 
 
 #Funcion Objetivo:
