@@ -22,7 +22,7 @@ modelo = ConcreteModel()
 # m cardinalidad del conjunto de vehiculos.
 # n cardinalidad del conjunto de nodos.
 
-
+print("- Parametros:","\n")
 modelo.i = Set(initialize=d, doc='Deposito')
 modelo.j = Set(initialize=c, doc='Cliente')
 modelo.k = Set(initialize=v, doc='Vehiculo')
@@ -43,13 +43,14 @@ for y in modelo.w:
 print("-------------Clientes------------------")
 for y in modelo.d:
   print(modelo.d[y]) 
-print("-------------Vehiculos-----------------")
+print("-------------Vehiculos-----------------","\n")
 for y in modelo.q:
   print(modelo.q[y]) 
 
 
 
 #V.Decision:
+print("- V.Decision:","\n")
 
 # Xijk : Variable binaria que indica que el nodo i precede al nodo j en la ruta k. 
 # Zij : Variable binaria que define si el consumidor ubicado en el nodo j es atendido por el centro de distribución i.
@@ -73,13 +74,14 @@ modelo.uj = Var(modelo.j, modelo.k, within= NonNegativeReals, bounds=(0.0,None),
 
 # s.a: - Restricciones:
 
+print("- Restricciones:","\n")
 
 t_inicial = time()
 def X_ijk_rule(modelo, i):
  return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) == 1
 modelo.X_ijk = Constraint(modelo.i, rule=X_ijk_rule, doc='Cada cliente j debe ser asignado a un vehiculo K')
 
-print("·R1 X_ijk·"," T. Ejecucion sg: ",(time()-t_inicial))
+print("·R1 X_ijk_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
 t_inicial = time()
 def Q_k_rule(modelo, i, k):
@@ -130,10 +132,10 @@ def objective_rule(modelo):
  return sum(cfv*modelo.x[i,j,k] for i in modelo.i for j in modelo.j for k in modelo.k)
 modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³n objetivo')
 
-print("·F.O objective_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
+print("·F.O objective_rule·"," T. Ejecucion sg: ",(time()-t_inicial),"\n")
 
 
-print("·················Finalizo el modelo··························")
+print("·················Finalizo el modelo··························","\n")
 
 
 
