@@ -82,9 +82,7 @@ N = len(v)
 
 print("------ tamaño vectores ----------")
 print(L,"-> Depositos")
-print("\n")
 print(C,"-> Clientes")
-print("\n") 
 print(N,"-> Vehiculos")
 print("\n")
 

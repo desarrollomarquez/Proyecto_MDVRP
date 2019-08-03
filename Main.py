@@ -124,7 +124,7 @@ def X_uk_rule(modelo, i, j):
  return  sum(modelo.ux[i,u,k] + modelo.xu[u,j,k] for j in modelo.j for k in modelo.k for u in modelo.u)  - modelo.z[i,j] <= 1 
 modelo.X_uk = Constraint(modelo.i, modelo.j, rule=X_uk_rule, doc='Garantiza asignacion de cliente j si transita por depositos i')
 
-print(".R7 X_uk_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
+print("·R7 X_uk_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
 #Funcion Objetivo:
 t_inicial = time()
