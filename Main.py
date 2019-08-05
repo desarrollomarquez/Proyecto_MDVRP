@@ -111,7 +111,7 @@ modelo.W_i = Constraint(modelo.i, rule=W_i_rule, doc='Capacidad del conjunto de 
 
 print("·R5 W_i_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
-t_inicial = time() # Revisar esta restriccion de secuencia....
+t_inicial = time() # Revisar esta restriccion de secuencia.... esto bajo subtours
 def U_ij_rule(modelo, i, j, k):
  return modelo.ui[i,k] - modelo.uj[j,k] + N*modelo.x[i,j,k] <= N-1
 modelo.U_ij = Constraint(modelo.i, modelo.j, modelo.k, rule=U_ij_rule, doc='Garantiza la eliminacion de SubTours')
