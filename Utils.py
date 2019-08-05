@@ -34,7 +34,7 @@ dfd  = pd.DataFrame(data_depositos[['x coordinate', 'y coordinate']].values, col
 mdcd = pd.DataFrame(distance_matrix(dfc.values, dfd.values), index=data_clientes['Cliente'], columns=data_depositos['Deposito'])
 
 # PARAMETROS GENERALES DEL P.L.
-# Costo fijo de los vehiculos.
+# Costo fijo de los vehiculos. Revisar el tema para mototaxis o camiones de carga pequeña en australia...
 cfv =  2428.90 # Costo fijo de los vehiculos. ejemplo : $ 5'400.000 pesos colombianos -> Dolar Australiano como es flota homogenea corresponde al mismo
 
 # Lista de costo por kilometro de los vehiculos.
