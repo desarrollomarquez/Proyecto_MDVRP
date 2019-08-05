@@ -121,7 +121,7 @@ print("·R6 U_ij_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 # Un cliente puede ser asignado al deposito, unicamente si hay una ruta que parte desde el mismo deposito y transita atravez del cliente.
 t_inicial = time()
 def X_uk_rule(modelo, i, j):
- return  sum(modelo.ux[j,u,k] + modelo.xu[u,j,k] for j in modelo.j for k in modelo.k for u in modelo.u)  - modelo.z[i,j] <= 1 
+ return  sum(modelo.ux[i,u,k] + modelo.xu[u,j,k] for j in modelo.j for k in modelo.k for u in modelo.u)  - modelo.z[i,j] <= 1 
 modelo.X_uk = Constraint(modelo.i, modelo.j, rule=X_uk_rule, doc='Garantiza asignacion de cliente j si transita por depositos i')
 
 print("·R7 X_uk_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
