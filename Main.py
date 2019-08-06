@@ -140,4 +140,14 @@ print("·················Finalizo el modelo··········�
 
 
 
+# Funcion para llamar al solucionador de problema (NEOS)
+
+instance = modelo
+opt = SolverFactory("cplex") #cbc
+solver_manager = SolverManagerFactory('neos')
+results = solver_manager.solve(instance, opt=opt)
+results.write()
+modelo.x.display()
+modelo.objective.display()
+
 
