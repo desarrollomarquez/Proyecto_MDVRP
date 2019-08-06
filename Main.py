@@ -114,7 +114,6 @@ print("·R5 W_i_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 t_inicial = time() # Revisar esta restriccion de secuencia.... esto bajo subtours
 def U_ij_rule(modelo, i, j, k):
  return modelo.ui[i,k] - modelo.uj[j,k] + N*modelo.x[i,j,k] <= N-1
-
 modelo.U_ij = Constraint(modelo.i, modelo.j, modelo.k, rule=U_ij_rule, doc='Garantiza la eliminacion de SubTours')
 
 print("·R6 U_ij_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
@@ -143,11 +142,11 @@ print("·················Finalizo el modelo··········�
 # Funcion para llamar al solucionador de problema (NEOS)
 
 instance = modelo
-opt = SolverFactory("cplex") #cbc
+opt = SolverFactory("minos") # cbc - cplex - glpk
 solver_manager = SolverManagerFactory('neos')
-results = solver_manager.solve(instance, opt=opt)
+results = solver_manager.solve(instance, opt=opt, options="threads=4")
 results.write()
 modelo.x.display()
 modelo.objective.display()
-
+#['bonmin', 'cbc', 'conopt', 'couenne', 'cplex', 'filmint', 'filter', 'ipopt', 'knitro', 'l-bfgs-b', 'loqo', 'minlp', 'minos', 'minto', 'mosek', 'ooqp', 'path', 'snopt']
 
