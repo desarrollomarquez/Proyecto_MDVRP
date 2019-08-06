@@ -113,7 +113,6 @@ print("·R5 W_i_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
 t_inicial = time() # Revisar esta restriccion de secuencia.... esto bajo subtours
 def U_ij_rule(modelo, i, j, k):
- print(modelo.ui[i,k])
  return modelo.ui[i,k] - modelo.uj[j,k] + N*modelo.x[i,j,k] <= N-1
 
 modelo.U_ij = Constraint(modelo.i, modelo.j, modelo.k, rule=U_ij_rule, doc='Garantiza la eliminacion de SubTours')
