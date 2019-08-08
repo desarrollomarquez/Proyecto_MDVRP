@@ -57,7 +57,7 @@ print("- V.Decision:","\n")
 # Zij : Variable binaria que define si el consumidor ubicado en el nodo j es atendido por el centro de distribución i.
 # Ulk : Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k.
 
-modelo.x = Var(modelo.i, modelo.j, modelo.k, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo i precede al nodo j en la ruta k')
+modelo.x = Var(modelo.i, modelo.j, modelo.k, within= Binary, bounds=(0.0,1), doc='Variable binaria que indica que el nodo i precede al nodo j en la ruta k')
 
 modelo.xx = Var(modelo.j, modelo.i, modelo.k, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo j precede al nodo i en la ruta k')
 
@@ -140,26 +140,21 @@ print("·················Finalizo el modelo··········�
 
 
 #%%
+def pyomo_postprocess(options=None, instance=None, results=None):
+  modelo.ui.display()
 
-for v_data in modelo.component_data_objects(Var, descend_into=True):
-    print("Found: "+v_data.name+", value = "+str(value(v_data)))
-
-#for v in instance.component_objects(pyo.Var, active=True):
-#     print("Variable",v)  # doctest: +SKIP
-#     for index in v:
-#       print ("   ",index, pyo.value(v[index]))  # doctest: +SKIP
-
+print(pyomo_postprocess("threads=1", modelo, 2))
 
 #%%
 
 # Funcion para llamar al solucionador de problema (NEOS)
 
-#instance = modelo
-#opt = SolverFactory("cbc") # cbc - cplex - glpk
-#solver_manager = SolverManagerFactory('neos')
-#results = solver_manager.solve(instance, opt=opt, options="threads=4")
-#results.write()
-#modelo.x.display()
-#modelo.objective.display()
+instance = modelo
+opt = SolverFactory("cbc") # cbc - cplex - glpk
+solver_manager = SolverManagerFactory('neos')
+results = solver_manager.solve(instance, opt=opt, options="threads=4")
+results.write()
+modelo.x.display()
+modelo.objective.display()
 #['bonmin', 'cbc', 'conopt', 'couenne', 'cplex', 'filmint', 'filter', 'ipopt', 'knitro', 'l-bfgs-b', 'loqo', 'minlp', 'minos', 'minto', 'mosek', 'ooqp', 'path', 'snopt']
 
