@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
-import pyomo
+import pyomo as pyo
+#from pyomo.environ as pyo
 from pyomo.environ import *
 from Utils import *
 from time import time #importamos la función time para capturar tiempos
@@ -140,22 +141,25 @@ print("·················Finalizo el modelo··········�
 
 #%%
 
-for v in instance.component_objects(pyo.Var, active=True):
-     print("Variable",v)  # doctest: +SKIP
-     for index in v:
-       print ("   ",index, pyo.value(v[index]))  # doctest: +SKIP
+for v_data in modelo.component_data_objects(Var, descend_into=True):
+    print("Found: "+v_data.name+", value = "+str(value(v_data)))
+
+#for v in instance.component_objects(pyo.Var, active=True):
+#     print("Variable",v)  # doctest: +SKIP
+#     for index in v:
+#       print ("   ",index, pyo.value(v[index]))  # doctest: +SKIP
 
 
 #%%
 
 # Funcion para llamar al solucionador de problema (NEOS)
 
-instance = modelo
-opt = SolverFactory("cbc") # cbc - cplex - glpk
-solver_manager = SolverManagerFactory('neos')
-results = solver_manager.solve(instance, opt=opt, options="threads=4")
-results.write()
-modelo.x.display()
-modelo.objective.display()
+#instance = modelo
+#opt = SolverFactory("cbc") # cbc - cplex - glpk
+#solver_manager = SolverManagerFactory('neos')
+#results = solver_manager.solve(instance, opt=opt, options="threads=4")
+#results.write()
+#modelo.x.display()
+#modelo.objective.display()
 #['bonmin', 'cbc', 'conopt', 'couenne', 'cplex', 'filmint', 'filter', 'ipopt', 'knitro', 'l-bfgs-b', 'loqo', 'minlp', 'minos', 'minto', 'mosek', 'ooqp', 'path', 'snopt']
 
