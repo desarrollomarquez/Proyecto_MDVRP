@@ -144,7 +144,7 @@ def pyomo_postprocess(options=None, instance=None, results=None):
   modelo.ui.display()
 
 print(pyomo_postprocess("threads=1", modelo, 2))
-
+# Revisar el valor de la variable binaria....
 #%%
 
 # Funcion para llamar al solucionador de problema (NEOS)
