@@ -83,6 +83,13 @@ modelo.X_ijk = Constraint(modelo.i, rule=X_ijk_rule, doc='Cada cliente j debe se
 
 print("·R1 X_ijk_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
+t_inicial = time()
+def Q_k_rule(modelo, i, k):
+ return sum( modelo.d[j] for j in modelo.j )*sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= modelo.q[k]
+modelo.Q_k = Constraint(modelo.i, modelo.k,  rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
+
+print("·R2 Q_k_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
+
 
 #Funcion Objetivo: cfv*
 t_inicial = time()
