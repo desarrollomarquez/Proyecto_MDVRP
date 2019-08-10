@@ -65,7 +65,7 @@ modelo.ux = Var(modelo.j, modelo.u, modelo.k, within= Binary, bounds=(0.0,None),
 
 modelo.xu = Var(modelo.u, modelo.j, modelo.k, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo u precede al nodo j en la ruta k')
 
-modelo.z = Var(modelo.i, modelo.j, within= Binary, bounds=(0.0,None), doc='Variable binaria que define si el consumidor ubicado en el nodo j es atendido por el centro de distribución i.')
+modelo.z = Var(modelo.i, modelo.j, initialize=1, within= Binary, bounds=(0.0,None), doc='Variable binaria que define si el consumidor ubicado en el nodo j es atendido por el centro de distribución i.')
 
 modelo.ui = Var(modelo.i, modelo.k, within= NonNegativeReals, bounds=(0.0,None), doc='Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k para i.')
 
@@ -110,6 +110,14 @@ def W_i_rule(modelo, i):
 modelo.W_i = Constraint(modelo.i, rule=W_i_rule, doc='Capacidad del conjunto de depositos i')
 
 print("·R5 W_i_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
+
+t_inicial = time() # Revisar esta restriccion de secuencia.... esto bajo subtours
+def U_ij_rule(modelo, i, j, k):
+ return modelo.ui[i,k] - modelo.uj[j,k] + N*modelo.x[i,j,k] <= N-1
+modelo.U_ij = Constraint(modelo.i, modelo.j, modelo.k, rule=U_ij_rule, doc='Garantiza la eliminacion de SubTours')
+
+print("·R6 U_ij_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
+
 
 #Funcion Objetivo: cfv*
 t_inicial = time()
