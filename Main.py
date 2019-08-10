@@ -59,7 +59,7 @@ print("- V.Decision:","\n")
 
 modelo.x = Var(modelo.i, modelo.j, modelo.k, initialize=1, within= Binary, bounds=(0.0,1), doc='Variable binaria que indica que el nodo i precede al nodo j en la ruta k')
 
-modelo.xx = Var(modelo.j, modelo.i, modelo.k, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo j precede al nodo i en la ruta k')
+modelo.xx = Var(modelo.j, modelo.i, modelo.k, initialize=1, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo j precede al nodo i en la ruta k')
 
 modelo.ux = Var(modelo.j, modelo.u, modelo.k, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo j precede al nodo u en la ruta k')
 
@@ -90,6 +90,19 @@ modelo.Q_k = Constraint(modelo.i, modelo.k,  rule=Q_k_rule, doc='Capacidad del c
 
 print("·R2 Q_k_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
+t_inicial = time()
+def X_ijk_X_jik_rule(modelo, i):
+ return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k ) - sum(modelo.xx[j,i,k] for j in modelo.j for k in modelo.k ) == 0
+modelo.X_ijk_X_jik_rule = Constraint(modelo.i,  rule=X_ijk_X_jik_rule , doc='Conservacion de Flujos')
+
+print("·R3 X_ijk_X_jik_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
+
+t_inicial = time()
+def X_ijk__rule(modelo, i):
+ return sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= 1
+modelo.X_ijk__ = Constraint(modelo.i, rule=X_ijk__rule, doc='Garantiza que cada vehiculo atienda almenos una unica ruta')
+
+print("·R4 X_ijk__rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
 #Funcion Objetivo: cfv*
 t_inicial = time()
