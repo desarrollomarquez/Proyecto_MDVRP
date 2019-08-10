@@ -61,9 +61,9 @@ modelo.x = Var(modelo.i, modelo.j, modelo.k, initialize=1, within= Binary, bound
 
 modelo.xx = Var(modelo.j, modelo.i, modelo.k, initialize=1, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo j precede al nodo i en la ruta k')
 
-modelo.ux = Var(modelo.j, modelo.u, modelo.k, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo j precede al nodo u en la ruta k')
+modelo.ux = Var(modelo.j, modelo.u, modelo.k, initialize=1, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo j precede al nodo u en la ruta k')
 
-modelo.xu = Var(modelo.u, modelo.j, modelo.k, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo u precede al nodo j en la ruta k')
+modelo.xu = Var(modelo.u, modelo.j, modelo.k, initialize=1, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo u precede al nodo j en la ruta k')
 
 modelo.z = Var(modelo.i, modelo.j, initialize=1, within= Binary, bounds=(0.0,None), doc='Variable binaria que define si el consumidor ubicado en el nodo j es atendido por el centro de distribución i.')
 
@@ -117,6 +117,14 @@ def U_ij_rule(modelo, i, j, k):
 modelo.U_ij = Constraint(modelo.i, modelo.j, modelo.k, rule=U_ij_rule, doc='Garantiza la eliminacion de SubTours')
 
 print("·R6 U_ij_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
+
+# Un cliente puede ser asignado al deposito, unicamente si hay una ruta que parte desde el mismo deposito y transita atravez del cliente.
+t_inicial = time()
+def X_uk_rule(modelo, i, j):
+ return  sum(modelo.ux[i,u,k] + modelo.xu[u,j,k] for j in modelo.j for k in modelo.k for u in modelo.u)  - modelo.z[i,j] <= 1 
+modelo.X_uk = Constraint(modelo.i, modelo.j, rule=X_uk_rule, doc='Garantiza asignacion de cliente j si transita por depositos i')
+
+print("·R7 X_uk_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
 
 #Funcion Objetivo: cfv*
