@@ -140,21 +140,21 @@ print("·················Finalizo el modelo··········�
 
 
 #%%
-def pyomo_postprocess(options=None, instance=None, results=None):
-  modelo.ui.display()
+#def pyomo_postprocess(options=None, instance=None, results=None):
+ # modelo.ui.display()
 
-print(pyomo_postprocess("threads=1", modelo, 2))
+#print(pyomo_postprocess("threads=1", modelo, 2))
 # Revisar el valor de la variable binaria....
 #%%
 
 # Funcion para llamar al solucionador de problema (NEOS)
 
-#instance = modelo
-#opt = SolverFactory("cbc") # cbc - cplex - glpk
-#solver_manager = SolverManagerFactory('neos')
-#results = solver_manager.solve(instance, opt=opt, options="threads=4")
-#results.write()
-#modelo.x.display()
-#modelo.objective.display()
+instance = modelo
+opt = SolverFactory("cbc") # cbc - cplex - glpk
+solver_manager = SolverManagerFactory('neos')
+results = solver_manager.solve(instance, opt=opt, options="threads=4")
+results.write()
+modelo.x.display()
+modelo.objective.display()
 #['bonmin', 'cbc', 'conopt', 'couenne', 'cplex', 'filmint', 'filter', 'ipopt', 'knitro', 'l-bfgs-b', 'loqo', 'minlp', 'minos', 'minto', 'mosek', 'ooqp', 'path', 'snopt']
 
