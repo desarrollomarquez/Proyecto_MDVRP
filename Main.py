@@ -57,7 +57,7 @@ print("- V.Decision:","\n")
 # Zij : Variable binaria que define si el consumidor ubicado en el nodo j es atendido por el centro de distribución i.
 # Ulk : Variable auxiliar usada en las restricciones de eliminación de sub-toures en la ruta k.
 
-modelo.x = Var(modelo.i, modelo.j, modelo.k, within= Binary, bounds=(0.0,1), doc='Variable binaria que indica que el nodo i precede al nodo j en la ruta k')
+modelo.x = Var(modelo.i, modelo.j, modelo.k, initialize=1, within= Binary, bounds=(0.0,1), doc='Variable binaria que indica que el nodo i precede al nodo j en la ruta k')
 
 modelo.xx = Var(modelo.j, modelo.i, modelo.k, within= Binary, bounds=(0.0,None), doc='Variable binaria que indica que el nodo j precede al nodo i en la ruta k')
 
@@ -85,7 +85,7 @@ print("·R1 X_ijk_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
 t_inicial = time()
 def Q_k_rule(modelo, i, k):
- return sum( modelo.d[j] for j in modelo.j )*sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= modelo.q[k]
+ return sum( modelo.d[j] for j in modelo.j)*sum(modelo.x[i,j,k] for j in modelo.j for k in modelo.k) <= modelo.q[k]
 modelo.Q_k = Constraint(modelo.i, modelo.k,  rule=Q_k_rule, doc='Capacidad del conjunto de vehiculos K')
 
 print("·R2 Q_k_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
