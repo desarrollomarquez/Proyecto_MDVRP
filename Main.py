@@ -104,6 +104,13 @@ modelo.X_ijk__ = Constraint(modelo.i, rule=X_ijk__rule, doc='Garantiza que cada 
 
 print("·R4 X_ijk__rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
+t_inicial = time()
+def W_i_rule(modelo, i):
+ return sum(modelo.d[i]*modelo.z[i,j] for j in modelo.j)  <= modelo.w[i]
+modelo.W_i = Constraint(modelo.i, rule=W_i_rule, doc='Capacidad del conjunto de depositos i')
+
+print("·R5 W_i_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
+
 #Funcion Objetivo: cfv*
 t_inicial = time()
 def objective_rule(modelo):
