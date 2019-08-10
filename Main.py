@@ -128,6 +128,7 @@ print("·R7 X_uk_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
 
 #Funcion Objetivo: cfv*
+
 t_inicial = time()
 def objective_rule(modelo):
  return sum(cfv*modelo.x[i,j,k] for i in modelo.i for j in modelo.j for k in modelo.k)
@@ -135,8 +136,7 @@ modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³
 
 print("·F.O objective_rule·"," T. Ejecucion sg: ",(time()-t_inicial),"\n")
 
-
-print("·················Finalizo el modelo··························","\n")
+#print("·················Finalizo el modelo··························","\n")
 
 
 #%%
@@ -147,12 +147,13 @@ print("·················Finalizo el modelo··········�
 # Revisar el valor de la variable binaria....
 #%%
 
+
 # Funcion para llamar al solucionador de problema (NEOS)
 
 instance = modelo
-opt = SolverFactory("cplex") # cbc - cplex - glpk
+opt = SolverFactory("couenne") # cbc - cplex - glpk
 solver_manager = SolverManagerFactory('neos')
-results = solver_manager.solve(instance, opt=opt, options="threads=4")
+results = solver_manager.solve(instance, opt=opt) ##options="threads=8")
 results.write()
 modelo.x.display()
 modelo.objective.display()
