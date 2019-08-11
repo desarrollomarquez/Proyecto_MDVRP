@@ -136,7 +136,7 @@ modelo.objective = Objective(rule=objective_rule, sense=minimize, doc='FunciÃ³
 
 print("·F.O objective_rule·"," T. Ejecucion sg: ",(time()-t_inicial),"\n")
 
-#print("·················Finalizo el modelo··························","\n")
+print("·················Finalizo el modelo··························","\n")
 
 
 #%%
@@ -151,7 +151,7 @@ print("·F.O objective_rule·"," T. Ejecucion sg: ",(time()-t_inicial),"\n")
 # Funcion para llamar al solucionador de problema (NEOS)
 
 instance = modelo
-opt = SolverFactory("couenne") # cbc - cplex - glpk
+opt = SolverFactory("cbc") # cbc - cplex - glpk
 solver_manager = SolverManagerFactory('neos')
 results = solver_manager.solve(instance, opt=opt) ##options="threads=8")
 results.write()
