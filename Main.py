@@ -150,6 +150,7 @@ print("·················Finalizo el modelo··········�
 
 # Funcion para llamar al solucionador de problema (NEOS)
 
+print("·················llamada al solucionador de problema (NEOS)··························","\n")
 instance = modelo
 opt = SolverFactory("cbc") # cbc - cplex - glpk
 solver_manager = SolverManagerFactory('neos')
