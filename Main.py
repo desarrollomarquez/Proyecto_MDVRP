@@ -127,7 +127,7 @@ modelo.X_uk = Constraint(modelo.i, modelo.j, rule=X_uk_rule, doc='Garantiza asig
 print("·R7 X_uk_rule·"," T. Ejecucion sg: ",(time()-t_inicial))
 
 
-#Funcion Objetivo: cfv*
+#Funcion Objetivo: 
 
 t_inicial = time()
 def objective_rule(modelo):
