@@ -151,6 +151,7 @@ print("·················Finalizo el modelo··········�
 # Funcion para llamar al solucionador de problema (NEOS)
 
 print("·················llamada al solucionador de problema (NEOS)··························","\n")
+
 instance = modelo
 opt = SolverFactory("cbc") # cbc - cplex - glpk
 solver_manager = SolverManagerFactory('neos')
@@ -159,4 +160,5 @@ results.write()
 modelo.x.display()
 modelo.objective.display()
 #['bonmin', 'cbc', 'conopt', 'couenne', 'cplex', 'filmint', 'filter', 'ipopt', 'knitro', 'l-bfgs-b', 'loqo', 'minlp', 'minos', 'minto', 'mosek', 'ooqp', 'path', 'snopt']
+print("················· Final de llamada al solucionador de problema (NEOS)··························","\n")
 
