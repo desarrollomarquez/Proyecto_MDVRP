@@ -152,7 +152,7 @@ print("·················Finalizo el modelo··········�
 
 print("·················llamada al solucionador de problema (NEOS)··························","\n")
 instance = modelo
-opt = SolverFactory("cbc") # cbc - cplex - glpk
+opt = SolverFactory("cplex") # cbc - cplex - glpk
 solver_manager = SolverManagerFactory('neos')
 results = solver_manager.solve(instance, opt=opt) ##options="threads=8")
 results.write()
