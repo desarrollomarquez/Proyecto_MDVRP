@@ -3,9 +3,10 @@ $eolCom //
 option optCr = 0, limRow = 0, limCol = 0, solPrint = off;
 
 Set
+
 i 'depositos'
-      /d1 'Pud Thai Vs Pho', d2 'Hungry Jack s', d3 'The Comics Lounge', d4 'Fat Face Food', d5 'Saddles@HQ',
-       d6 'McDonalds', d7 'Eat & Grab', d8 'Coffee Hq', d9 'Australian Education Academy Cafe', d10 'Subway Vic Harbour' /,
+       / d1 'Pud Thai Vs Pho', d2 'Hungry Jack s', d3 'The Comics Lounge', d4 'Fat Face Food', d5 'Saddles@HQ',
+         d6 'DepMcDonalds', d7 'Eat & Grab', d8 'Coffee Hq', d9 'Australian Education Academy Cafe', d10 'Subway Vic Harbour' /,
 
 j 'clientes'
        / c1 'The Coffee Cup', c2 'Cafe Max', c3 'Saquella Caffe', c4 'Ciao Pizza Napoli', c5 'Cafe Malone', c6 'Chambers Fine Foods',
@@ -15,9 +16,8 @@ j 'clientes'
          c25 'Centro Citta Restaurant', c26 'Bistro 1', c27 'Pizza Napoli', c28 'Stamford Plaza Hotel', c29 'Daniels Charcoal Grill' /,
 
 k 'vehiculos'
-      / v1  'Manchester, N.H.',     v2  'Montpelier, Vt.',      v3  'Detroit, Mich.'
-        v4  'Cleveland, Ohio',      v5  'Charleston, W.Va.',    v6  'Louisville, Ky.'
-        v7  'Indianapolis, Ind.',   v8  'Chicago, Ill.',        v9  'Milwaukee, Wis.'    /;
+       / v1 'TRUCK-SHORT1', v2 'TRUCK-SHORT2', v3 'TRUCK-SHORT3', v4 'TRUCK-SHORT4', v5 'TRUCK-SHORT5',
+         v6 'TRUCK-SHORT6', v7 'TRUCK-SHORT7', v8 'TRUCK-SHORT8', v9 'TRUCK-SHORT9' /;
 
 
 
