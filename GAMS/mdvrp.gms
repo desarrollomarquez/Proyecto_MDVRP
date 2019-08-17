@@ -37,6 +37,17 @@ d10       0.0191947719        0.0192311570        0.0192448252        0.01898616
 
 Parameters
        w(i) capacidad del deposito
+            /    Pud Thai Vs Pho                    1400
+                 Hungry Jack s                       750
+                 The Comics Lounge                   400
+                 Fat Face Food                       550
+                 Saddles@HQ                          800
+                 DepMcDonalds                       1100
+                 Eat & Grab                          700
+                 Coffee Hq                           600
+                 Australian Education Academy Cafe  1000
+                 Subway Vic Harbour                 1100 /
+
        d(j) demanda del cliente
             /     The Coffee Cup             1100
                   Cafe Max                    800
@@ -69,6 +80,15 @@ Parameters
                   Daniels Charcoal Grill      260 /
 
        Q(k) capacidad del vehiculo;
+             /    TRUCK-SHORT1   1500
+                  TRUCK-SHORT2   1500
+                  TRUCK-SHORT3   1500
+                  TRUCK-SHORT4   1500
+                  TRUCK-SHORT5   1500
+                  TRUCK-SHORT6   1500
+                  TRUCK-SHORT7   1500
+                  TRUCK-SHORT8   1500
+                  TRUCK-SHORT9   1500 /
 
 
 Scalar cv  costo de un vehiculo por kilometro  /0.03/ ;
