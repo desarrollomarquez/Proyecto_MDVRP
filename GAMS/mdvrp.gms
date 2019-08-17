@@ -90,7 +90,7 @@ Set lt(i,j) 'lower triangular';
 lt(i,j)$(ord(i) > ord(j)) = yes;
 
 Free   Variable z;
-Binary Variable x(i,j,k);
+Binary Variable x(i,j);
 
 Equation twomatch(i), obj;
 
