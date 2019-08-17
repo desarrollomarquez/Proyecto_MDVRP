@@ -2,21 +2,24 @@ $eolCom //
 
 option optCr = 0, limRow = 0, limCol = 0, solPrint = off;
 
-Set i 'cities'
-      / c1  'Manchester, N.H.',     c2  'Montpelier, Vt.',      c3  'Detroit, Mich.'
-        c4  'Cleveland, Ohio',      c5  'Charleston, W.Va.',    c6  'Louisville, Ky.'
-        c7  'Indianapolis, Ind.',   c8  'Chicago, Ill.',        c9  'Milwaukee, Wis.'
-        c10 'Minneapolis, Minn.',   c11 'Pierre, S.D.',         c12 'Bismarck, N.D.'
-        c13 'Helena, Mont.',        c14 'Seattle, Wash.',       c15 'Portland, Ore.'
-        c16 'Boise, Idaho',         c17 'Salt Lake City, Utah', c18 'Carson City, Nevada'
-        c19 'Los Angeles, Calif.',  c20 'Phoenix, Ariz.',       c21 'Santa Fe, N.M.'
-        c22 'Denver, Colo.',        c23 'Cheyenne, Wyo.',       c24 'Omaha, Neb.'
-        c25 'Des Moines, Iowa',     c26 'Kansas City, Mo.',     c27 'Topeka, Kans.'
-        c28 'Oklahoma City, Okla.', c29 'Dallas, Tex.',         c30 'Little Rock, Ark.'
-        c31 'Memphis, Tenn.',       c32 'Jackson, Miss.',       c33 'New Orleans, La.'
-        c34 'Birmingham, Ala.',     c35 'Atlanta, Ga.',         c36 'Jacksonville, Fla.'
-        c37 'Columbia, S.C.',       c38 'Raleigh, N.C.',        c39 'Richmond, Va.'
-        c40 'Washington, D.C.',     c41 'Boston, Mass.',        c42 'Portland, Me.'      /;
+Set
+i 'depositos'
+      /d1 'Pud Thai Vs Pho', d2 'Hungry Jack s', d3 'The Comics Lounge', d4 'Fat Face Food', d5 'Saddles@HQ',
+       d6 'McDonalds', d7 'Eat & Grab', d8 'Coffee Hq', d9 'Australian Education Academy Cafe', d10 'Subway Vic Harbour' /,
+
+j 'clientes'
+       / c1 'The Coffee Cup', c2 'Cafe Max', c3 'Saquella Caffe', c4 'Ciao Pizza Napoli', c5 'Cafe Malone', c6 'Chambers Fine Foods',
+         c7 'Becco', c8 'The Gourmet Gulp', c9 'Cafe Q', c10 'Lady Jade Tea House', c11 'Borlotti Restaurant', c12 'Lures Gourmet Sandwich Bar',
+         c13 'Hermes Fine Foods', c14 'McDonalds', c15 'Menzies Tavern', c16 'Cafe Exchange', c17 'Cafe Cento Venti', c18 'Garden Plaza Cafe',
+         c19 'Mediterranean Deli', c20 'Nauru House Cafe', c21 'Dr Martins Tavern', c22 'Janils Cafe', c23 'Edoya Restaurant', c24 'Taco Bills Restaurant',
+         c25 'Centro Citta Restaurant', c26 'Bistro 1', c27 'Pizza Napoli', c28 'Stamford Plaza Hotel', c29 'Daniels Charcoal Grill' /,
+
+k 'vehiculos'
+      / v1  'Manchester, N.H.',     v2  'Montpelier, Vt.',      v3  'Detroit, Mich.'
+        v4  'Cleveland, Ohio',      v5  'Charleston, W.Va.',    v6  'Louisville, Ky.'
+        v7  'Indianapolis, Ind.',   v8  'Chicago, Ill.',        v9  'Milwaukee, Wis.'    /;
+
+
 
 Alias (i,j,k);
 
