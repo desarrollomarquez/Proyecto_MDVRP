@@ -33,12 +33,64 @@ d9        0.0336821757        0.0340107564        0.0341571840        0.03399902
 d10       0.0191947719        0.0192311570        0.0192448252        0.0189861625        0.0188032911        0.0184415499        0.0291155393        0.0139415650        0.0139415650        0.0139415650        0.0139415650        0.0139358009        0.0142802791        0.0153780588        0.0145276343        0.0138753491        0.0268907806        0.0268907806        0.0282744627        0.0282744627        0.0280784253        0.0274526447        0.0261914739        0.0261914739        0.0269634097        0.0271984738        0.0263703520        0.0273340310        0.0209915514     ;
 
 
-Free Variable z;
-Binary Variable x(i,j);
 
-Equation obj;
 
-obj..    z =e= sum((i,j),d(i,j)*x(i,j));
+Parameters
+       w(i) capacidad del deposito
+       d(j) demanda del cliente
+            /     The Coffee Cup             1100
+                  Cafe Max                    800
+                  Saquella Caffe              900
+                  Ciao Pizza Napoli           560
+                  Cafe Malone                 490
+                  Chambers Fine Foods         550
+                  Becco                       370
+                  The Gourmet Gulp            600
+                  Cafe Q                      180
+                  Lady Jade Tea House         240
+                  Borlotti Restaurant         760
+                  Lures Gourmet Sandwich Bar  540
+                  Hermes Fine Foods           220
+                  McDonalds                  1000
+                  Menzies Tavern              120
+                  Cafe Exchange               330
+                  Cafe Cento Venti            800
+                  Garden Plaza Cafe           850
+                  Mediterranean Deli          440
+                  Nauru House Cafe            180
+                  Dr Martins Tavern           180
+                  Janils Cafe                 100
+                  Edoya Restaurant            150
+                  Taco Bills Restaurant       700
+                  Centro Citta Restaurant     320
+                  Bistro 1                     80
+                  Pizza Napoli                 70
+                  Stamford Plaza Hotel        100
+                  Daniels Charcoal Grill      260 /
+
+       Q(k) capacidad del vehiculo;
+
+
+Scalar cv  costo de un vehiculo por kilometro  /0.03/ ;
+
+Parameter
+       c(i,j) costo de transporte por pedido;
+       c(i,j) = cv * d(i,j);
+
+Free Variable
+       z;
+
+Binary Variable
+       x(i,j,k);
+
+
+Equation obj
+         X_ijk 'Cada cliente j debe ser asignado a un vehiculo k'
+         Q_k_rule 'Capacidad del conjunto de vehiculos K';
+
+obj ..    z =e= sum((i,j,k),c(i,j)*x(i,j,k));
+
+X_ijk ..        sum((i,j,k),x(i,j,k))  =e=  1 ;
 
 Model mdvrp / obj /;
 
