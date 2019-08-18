@@ -19,7 +19,7 @@ k 'vehiculos'
          v6 'TRUCK-SHORT6', v7 'TRUCK-SHORT7', v8 'TRUCK-SHORT8', v9 'TRUCK-SHORT9' /;
 
 
-Table d(i,j)   'distancia desde los depositos i a los clientes j'
+Table ddc(i,j)   'distancia desde los depositos i a los clientes j'
                  c1                c2                    c3                c4                  c5                  c6                  c7                   c8                  c9                  c10                 c11                 c12                 c13                 c14                 c15                 c16                 c17                 c18                 c19                 c20                 c21                 c22                 c23                 c24                 c25                 c26                 c27                 c28                 c29
 d1        0.0130355057        0.0128974266        0.0128333254        0.0126201448        0.0124601290        0.0122777125        0.0217397334        0.0072929223        0.0072929223        0.0072929223        0.0072929223        0.0076025691        0.0069453512        0.0078906746        0.0072860067        0.0067619469        0.0190482464        0.0190482464        0.0204107244        0.0204107244        0.0201416823        0.0194920637        0.0187114699        0.0187114699        0.0194478182        0.0195957691        0.0187382624        0.0195297230        0.0161624307
 d2        0.0158213522        0.0154748419        0.0153173418        0.0153078935        0.0152826815        0.0155025683        0.0186465046        0.0136708598        0.0136708598        0.0136708598        0.0136708598        0.0141067672        0.0126958117        0.0124109338        0.0128207075        0.0130325219        0.0156694893        0.0156694893        0.0165469974        0.0165469974        0.0161759114        0.0156692283        0.0163112108        0.0163112108        0.0167149526        0.0166126808        0.0159758338        0.0160851884        0.0194773031
@@ -32,70 +32,66 @@ d8        0.0053422028        0.0054314166        0.0054836718        0.00570761
 d9        0.0336821757        0.0340107564        0.0341571840        0.0339990224        0.0339064805        0.0334940391        0.0409349257        0.0333645856        0.0333645856        0.0333645856        0.0333645856        0.0329568069        0.0343255309        0.0348207225        0.0342546190        0.0339528399        0.0408698347        0.0408698347        0.0417717477        0.0417717477        0.0418546513        0.0415331656        0.0395179072        0.0395179072        0.0400460846        0.0404114475        0.0400096826        0.0410324459        0.0316006936
 d10       0.0191947719        0.0192311570        0.0192448252        0.0189861625        0.0188032911        0.0184415499        0.0291155393        0.0139415650        0.0139415650        0.0139415650        0.0139415650        0.0139358009        0.0142802791        0.0153780588        0.0145276343        0.0138753491        0.0268907806        0.0268907806        0.0282744627        0.0282744627        0.0280784253        0.0274526447        0.0261914739        0.0261914739        0.0269634097        0.0271984738        0.0263703520        0.0273340310        0.0209915514     ;
 
-
-
-
 Parameters
-       W(i) capacidad del deposito
-            /    Pud Thai Vs Pho                    1400
-                 Hungry Jack s                       750
-                 The Comics Lounge                   400
-                 Fat Face Food                       550
-                 Saddles@HQ                          800
-                 DepMcDonalds                       1100
-                 Eat & Grab                          700
-                 Coffee Hq                           600
-                 Australian Education Academy Cafe  1000
-                 Subway Vic Harbour                 1100 /
 
-       D(j) demanda del cliente
-            /     The Coffee Cup             1100
-                  Cafe Max                    800
-                  Saquella Caffe              900
-                  Ciao Pizza Napoli           560
-                  Cafe Malone                 490
-                  Chambers Fine Foods         550
-                  Becco                       370
-                  The Gourmet Gulp            600
-                  Cafe Q                      180
-                  Lady Jade Tea House         240
-                  Borlotti Restaurant         760
-                  Lures Gourmet Sandwich Bar  540
-                  Hermes Fine Foods           220
-                  McDonalds                  1000
-                  Menzies Tavern              120
-                  Cafe Exchange               330
-                  Cafe Cento Venti            800
-                  Garden Plaza Cafe           850
-                  Mediterranean Deli          440
-                  Nauru House Cafe            180
-                  Dr Martins Tavern           180
-                  Janils Cafe                 100
-                  Edoya Restaurant            150
-                  Taco Bills Restaurant       700
-                  Centro Citta Restaurant     320
-                  Bistro 1                     80
-                  Pizza Napoli                 70
-                  Stamford Plaza Hotel        100
-                  Daniels Charcoal Grill      260 /
+cd(i) 'capacidad del deposito'
+    /   d1        1400
+        d2         750
+        d3         400
+        d4         550
+        d5         800
+        d6        1100
+        d7         700
+        d8         600
+        d9        1000
+        d10       1100/,
 
-       Q(k) capacidad del vehiculo
-             /    TRUCK-SHORT1   1500
-                  TRUCK-SHORT2   1500
-                  TRUCK-SHORT3   1500
-                  TRUCK-SHORT4   1500
-                  TRUCK-SHORT5   1500
-                  TRUCK-SHORT6   1500
-                  TRUCK-SHORT7   1500
-                  TRUCK-SHORT8   1500
-                  TRUCK-SHORT9   1500 / ;
+dc(j) 'demanda del cliente'
+    /   c1        1100
+        c2         800
+        c3         900
+        c4         560
+        c5         490
+        c6         550
+        c7         370
+        c8         600
+        c9         180
+        c10        240
+        c11        760
+        c12        540
+        c13        220
+        c14       1000
+        c15        120
+        c16        330
+        c17        800
+        c18        850
+        c19        440
+        c20        180
+        c21        180
+        c22        100
+        c23        150
+        c24        700
+        c25        320
+        c26         80
+        c27         70
+        c28        100
+        c29        260 /,
+cv(k) 'capacidad del vehiculo'
+    /   v1        1500
+        v2        1500
+        v3        1500
+        v4        1500
+        v5        1500
+        v6        1500
+        v7        1500
+        v8        1500
+        v9        1500/ ;
 
-
-Scalar cv  costo de un vehiculo por kilometro  /0.03/ ;
+Scalar cvk  costo de un vehiculo por kilometro  /0.03/ ;
 
 Parameter
        c(i,j) costo de transporte por pedido;
-       c(i,j) = cv * d(i,j);
+       c(i,j) = cvk * ddc(i,j);
 
 Free Variable
        z;
@@ -111,6 +107,8 @@ Equation obj
 obj ..    z =e= sum((i,j,k),c(i,j)*x(i,j,k));
 
 X_ijk ..        sum((i,j,k),x(i,j,k))  =e=  1 ;
+
+display cd, dc, cv;
 
 Model mdvrp / obj /;
 
