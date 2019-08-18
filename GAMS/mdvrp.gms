@@ -16,8 +16,14 @@ j 'clientes'
 
 k 'vehiculos'
        / v1 'TRUCK-SHORT1', v2 'TRUCK-SHORT2', v3 'TRUCK-SHORT3', v4 'TRUCK-SHORT4', v5 'TRUCK-SHORT5',
-         v6 'TRUCK-SHORT6', v7 'TRUCK-SHORT7', v8 'TRUCK-SHORT8', v9 'TRUCK-SHORT9' /;
+         v6 'TRUCK-SHORT6', v7 'TRUCK-SHORT7', v8 'TRUCK-SHORT8', v9 'TRUCK-SHORT9' /,
 
+u 'ruta vehiculos'
+       / c1 'The Coffee Cup', c2 'Cafe Max', c3 'Saquella Caffe', c4 'Ciao Pizza Napoli', c5 'Cafe Malone', c6 'Chambers Fine Foods',
+         c7 'Becco', c8 'The Gourmet Gulp', c9 'Cafe Q', c10 'Lady Jade Tea House', c11 'Borlotti Restaurant', c12 'Lures Gourmet Sandwich Bar',
+         c13 'Hermes Fine Foods', c14 'McDonalds', c15 'Menzies Tavern', c16 'Cafe Exchange', c17 'Cafe Cento Venti', c18 'Garden Plaza Cafe',
+         c19 'Mediterranean Deli', c20 'Nauru House Cafe', c21 'Dr Martins Tavern', c22 'Janils Cafe', c23 'Edoya Restaurant', c24 'Taco Bills Restaurant',
+         c25 'Centro Citta Restaurant', c26 'Bistro 1', c27 'Pizza Napoli', c28 'Stamford Plaza Hotel', c29 'Daniels Charcoal Grill' / ;
 
 Table ddc(i,j)   'distancia desde los depositos i a los clientes j'
                  c1                c2                    c3                c4                  c5                  c6                  c7                   c8                  c9                  c10                 c11                 c12                 c13                 c14                 c15                 c16                 c17                 c18                 c19                 c20                 c21                 c22                 c23                 c24                 c25                 c26                 c27                 c28                 c29
@@ -99,7 +105,9 @@ Free Variable
 Binary Variable
        x(i,j,k)
        xx(j,i,k)
-       ad(i,j);
+       ad(i,j)
+       ux(i,u,k)
+       xu(u,j,k);
 
 
 Equation obj
@@ -107,7 +115,8 @@ Equation obj
          Q_k_rule(j,k) 'Capacidad del conjunto de vehiculos k'
          X_ijk_X_jik_rule 'Conservacion de Flujos'
          X_ijk__rule 'Garantiza que cada vehiculo atienda almenos una unica ruta'
-         W_i(i) 'Capacidad del conjunto de depositos i';
+         W_i_rule(i) 'Capacidad del conjunto de depositos i'
+         X_uk_rule 'Garantiza asignacion de cliente j si transita por depositos i';
 
 obj ..                                         z =e= sum((i,j,k),c(i,j)*x(i,j,k));
 
@@ -115,7 +124,7 @@ X_ijk_rule ..                                      sum((i,j,k),x(i,j,k))  =e=  1
 Q_k_rule(j,k) ..                              dc(j)*sum((i),x(i,j,k))  =l= cv(k) ;
 X_ijk_X_jik_rule ..         sum((i,j,k),x(i,j,k))-sum((j,i,k),xx(j,i,k))  =e=  0 ;
 X_ijk__rule ..                                     sum((i,j,k),x(i,j,k))  =l=  1 ;
-W_i(i) ..                                     sum(j,dc(j)*ad(i,j))  =l= cd(i);
+W_i_rule(i) ..                                    sum(j,dc(j)*ad(i,j))  =l= cd(i);
 
 display cd, dc, cv;
 
