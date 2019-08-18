@@ -101,12 +101,14 @@ Binary Variable
 
 
 Equation obj
-         X_ijk 'Cada cliente j debe ser asignado a un vehiculo k'
-         Q_k_rule 'Capacidad del conjunto de vehiculos K';
+         X_ijk_rule 'Cada cliente j debe ser asignado a un vehiculo k'
+         Q_k_rule(j,k) 'Capacidad del conjunto de vehiculos k'
+         X_ijk_X_jik_rule 'Conservacion de Flujos';
 
-obj ..    z =e= sum((i,j,k),c(i,j)*x(i,j,k));
+obj ..                              z =e= sum((i,j,k),c(i,j)*x(i,j,k));
 
-X_ijk ..        sum((i,j,k),x(i,j,k))  =e=  1 ;
+X_ijk_rule ..                           sum((i,j,k),x(i,j,k))  =e=  1 ;
+Q_k_rule(j,k) ..                   dc(j)*sum((i),x(i,j,k))  =l= cv(k) ;
 
 display cd, dc, cv;
 
