@@ -98,14 +98,16 @@ Free Variable
 
 Binary Variable
        x(i,j,k)
-       xx(j,i,k);
+       xx(j,i,k)
+       ad(i,j);
 
 
 Equation obj
          X_ijk_rule 'Cada cliente j debe ser asignado a un vehiculo k'
          Q_k_rule(j,k) 'Capacidad del conjunto de vehiculos k'
          X_ijk_X_jik_rule 'Conservacion de Flujos'
-         X_ijk__rule 'Garantiza que cada vehiculo atienda almenos una unica ruta';
+         X_ijk__rule 'Garantiza que cada vehiculo atienda almenos una unica ruta'
+         W_i(i) 'Capacidad del conjunto de depositos i';
 
 obj ..                                         z =e= sum((i,j,k),c(i,j)*x(i,j,k));
 
@@ -113,6 +115,8 @@ X_ijk_rule ..                                      sum((i,j,k),x(i,j,k))  =e=  1
 Q_k_rule(j,k) ..                              dc(j)*sum((i),x(i,j,k))  =l= cv(k) ;
 X_ijk_X_jik_rule ..         sum((i,j,k),x(i,j,k))-sum((j,i,k),xx(j,i,k))  =e=  0 ;
 X_ijk__rule ..                                     sum((i,j,k),x(i,j,k))  =l=  1 ;
+W_i(i) ..                                     sum((i,j),dc(j)*ad(i,j))  =l= cd(i);
+
 display cd, dc, cv;
 
 Model mdvrp / obj /;
