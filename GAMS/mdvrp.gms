@@ -104,8 +104,8 @@ ij(i,j) = ord(i) > 1 and ord(j) > 1;
 
 Free Variable
        z
-       ui(i)
-       uj(j);
+       ui(i,k)
+       uj(j,k);
 
 
 Binary Variable
@@ -122,7 +122,8 @@ Equation obj
          X_ijk_X_jik_rule 'Conservacion de Flujos'
          X_ijk__rule 'Garantiza que cada vehiculo atienda almenos una unica ruta'
          W_i_rule(i) 'Capacidad del conjunto de depositos i'
-         X_uk_rule(u,i,j) 'Garantiza asignacion de cliente j si transita por depositos i';
+         X_uk_rule(u,i,j) 'Garantiza asignacion de cliente j si transita por depositos i'
+         U_ij_rule(i,j,k) 'Garantiza la eliminacion de SubTours';
 
 obj ..                                         z =e= sum((i,j,k),c(i,j)*x(i,j,k));
 
@@ -132,9 +133,9 @@ X_ijk_X_jik_rule ..        sum((i,j,k),x(i,j,k))- sum((j,i,k),xx(j,i,k))  =e=  0
 X_ijk__rule ..                                     sum((i,j,k),x(i,j,k))  =l=  1 ;
 W_i_rule(i) ..                                  sum(j,dc(j) * ad(i,j))  =l= cd(i);
 X_uk_rule(u,i,j) ..                sum(k,ux(i,u,k) + xu(u,j,k)) - ad(i,j)  =l=  1 ;
+U_ij_rule(i,j,k)..             ui(i,k) - uj(j,k) + card(i)*x(i,j,k) =l= card(i) - 1;
 
-
-display cd, dc, cv;
+display cd, dc, cv ;
 
 Model mdvrp / obj /;
 
