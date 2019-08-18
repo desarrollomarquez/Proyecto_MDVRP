@@ -97,7 +97,8 @@ Free Variable
        z;
 
 Binary Variable
-       x(i,j,k);
+       x(i,j,k)
+       xx(j,i,k);
 
 
 Equation obj
@@ -105,10 +106,11 @@ Equation obj
          Q_k_rule(j,k) 'Capacidad del conjunto de vehiculos k'
          X_ijk_X_jik_rule 'Conservacion de Flujos';
 
-obj ..                              z =e= sum((i,j,k),c(i,j)*x(i,j,k));
+obj ..                                         z =e= sum((i,j,k),c(i,j)*x(i,j,k));
 
-X_ijk_rule ..                           sum((i,j,k),x(i,j,k))  =e=  1 ;
-Q_k_rule(j,k) ..                   dc(j)*sum((i),x(i,j,k))  =l= cv(k) ;
+X_ijk_rule ..                                      sum((i,j,k),x(i,j,k))  =e=  1 ;
+Q_k_rule(j,k) ..                              dc(j)*sum((i),x(i,j,k))  =l= cv(k) ;
+X_ijk_X_jik_rule ..         sum((i,j,k),x(i,j,k))-sum((j,i,k),xx(j,i,k))  =e=  0 ;
 
 display cd, dc, cv;
 
