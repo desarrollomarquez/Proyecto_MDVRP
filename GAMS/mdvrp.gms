@@ -115,7 +115,7 @@ X_ijk_rule ..                                      sum((i,j,k),x(i,j,k))  =e=  1
 Q_k_rule(j,k) ..                              dc(j)*sum((i),x(i,j,k))  =l= cv(k) ;
 X_ijk_X_jik_rule ..         sum((i,j,k),x(i,j,k))-sum((j,i,k),xx(j,i,k))  =e=  0 ;
 X_ijk__rule ..                                     sum((i,j,k),x(i,j,k))  =l=  1 ;
-W_i(i) ..                                     sum((i,j),dc(j)*ad(i,j))  =l= cd(i);
+W_i(i) ..                                     sum(j,dc(j)*ad(i,j))  =l= cd(i);
 
 display cd, dc, cv;
 
