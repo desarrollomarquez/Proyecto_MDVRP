@@ -99,8 +99,14 @@ Parameter
        c(i,j) costo de transporte por pedido;
        c(i,j) = cvk * ddc(i,j);
 
+Set ij(i,j) 'exclude first row and column';
+ij(i,j) = ord(i) > 1 and ord(j) > 1;
+
 Free Variable
-       z;
+       z
+       ui(i)
+       uj(j);
+
 
 Binary Variable
        x(i,j,k)
