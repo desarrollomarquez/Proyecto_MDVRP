@@ -141,4 +141,4 @@ Model mdvrp / obj /;
 
 solve mdvrp minimizing z using mip;
 
-
+display cd, dc, cv,i,j,k ;
