@@ -41,21 +41,21 @@ d10       0.0191947719        0.0192311570        0.0192448252        0.01898616
 Parameters
 
 cd(i) 'capacidad del deposito'
-    /   d1        1400
-        d2         750
+    /   d1         200
+        d2         450
         d3         400
         d4         550
-        d5         800
-        d6        1100
+        d5         300
+        d6         100
         d7         700
         d8         600
-        d9        1000
-        d10       1100/,
+        d9         500
+        d10        500/,
 
 dc(j) 'demanda del cliente'
     /   c1        1100
         c2         800
-        c3         900
+        c3        9000
         c4         560
         c5         490
         c6         550
@@ -77,22 +77,22 @@ dc(j) 'demanda del cliente'
         c22        100
         c23        150
         c24        700
-        c25        320
+        c25       3200
         c26         80
         c27         70
-        c28        100
-        c29        260 /,
+        c28       1000
+        c29       2600 /,
 cv(k) 'capacidad del vehiculo'
-    /   v1        500
-        v2        500
-        v3        500
-        v4        500
-        v5        500
-        v6        500
-        v7        500
-        v8        500
-        v9        500/ ;
-
+    /   v1         50
+        v2         90
+        v3         60
+        v4         70
+        v5         80
+        v6        100
+        v7        100
+        v8        100
+        v9        100/ ;
+        
 Scalar cvk  costo de un vehiculo por kilometro  /0.03/ ;
 
 Parameter
