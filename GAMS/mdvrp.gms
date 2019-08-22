@@ -133,7 +133,7 @@ X_ijk_X_jik_rule ..        sum((i,j,k),x(i,j,k))- sum((j,i,k),xx(j,i,k))  =e=  0
 X_ijk__rule ..                                     sum((i,j,k),x(i,j,k))  =l=  1 ;
 W_i_rule(i) ..                                  sum(j,dc(j) * ad(i,j))  =l= cd(i);
 X_uk_rule(u,i,j) ..                sum(k,ux(i,u,k) + xu(u,j,k)) - ad(i,j)  =l=  1 ;
-U_ij_rule(i,j,k)..             ui(i,k) - uj(j,k) + card(i)*x(i,j,k) =l= card(i) - 1;
+
 
 display cd, dc, cv,i,j,k ;
 
