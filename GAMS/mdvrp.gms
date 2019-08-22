@@ -83,15 +83,15 @@ dc(j) 'demanda del cliente'
         c28        100
         c29        260 /,
 cv(k) 'capacidad del vehiculo'
-    /   v1        1500
-        v2        1500
-        v3        1500
-        v4        1500
-        v5        1500
-        v6        1500
-        v7        1500
-        v8        1500
-        v9        1500/ ;
+    /   v1        800
+        v2        800
+        v3        800
+        v4        800
+        v5        800
+        v6        800
+        v7        800
+        v8        800
+        v9        800/ ;
 
 Scalar cvk  costo de un vehiculo por kilometro  /0.03/ ;
 
