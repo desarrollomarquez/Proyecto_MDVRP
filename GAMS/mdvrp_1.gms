@@ -1,9 +1,7 @@
 $TITLE PROBLEMA DE LOCALIZACIONOPTION LIMROW=100;OPTION LIMCOL =100;OPTIONS OPTCR = 0.01;
 SET
-I       FABRICAS /BARNA,BILBAO,MADRID,VALENC/ 
+I       FABRICAS /BARNA,BILBAO,MADRID,VALENC/
 J       ZONAS /CATAL, NORTE, NOROE, LEVAN, CENTR, SUR/
-
-
 
 TABLE C(I,J)    COSTES VARIABLES DE DISTRIBUCION Y TRANSPORTE
               CATAL     NORTE     NOROE     LEVAN     CENTR     SUR
@@ -11,6 +9,9 @@ BARNA         10        62        110        35        62        100
 BILBAO        62        10         63        63        40         86
 MADRID        62        40         60        35         7         54
 VALENC        35        63         96        10        35         67;
+
+C(I,J)$(X(I,J) > 0.5) = yes;
+
 
 PARAMETER F(I) COSTES FIJOS
 /BARNA   100000
@@ -45,8 +46,7 @@ Y(I);
 
 VARIABLES
 X(I,J)
-Y(I);
-
+Y(I)
 BINARY VARIABLE
 X
 Y;
@@ -56,7 +56,7 @@ EQUATIONS
 OBJ;
 
 
-OBJ..   FO =E= SUM((I,J), C(I,J)*X(I,J));
+OBJ..   FO =E= SUM(LT(I,J), C(I,J)*X(I,J));
 
 
 MODEL LOCALIZ /ALL/;
