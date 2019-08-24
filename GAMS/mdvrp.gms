@@ -1,6 +1,6 @@
 $eolCom //
 
-option optCr = 0.00001, limRow = 0, limCol = 0, solPrint = on;
+option optCr = 0.00001, limRow = 0, limCol = 0, solPrint = off;
 
 Sets
 i 'depositos'
@@ -99,16 +99,12 @@ Parameter
        c(i,j) costo de transporte por pedido;
        c(i,j) = cvk * ddc(i,j)*10000;
 
-Set ij(i,j) 'exclude first row and column';
-ij(i,j) = ord(i) > 1 and ord(j) > 1;
-
 Free Variable
        z
        ui(i,k)
-       uj(j,k);
+       uj(j,k)
 
-
-Binary Variable
+Binary Variables
        x(i,j,k)
        xx(j,i,k)
        ad(i,j)
@@ -128,14 +124,18 @@ Equation obj
 
 obj ..                                         z =e= sum((i,j,k),c(i,j)*x(i,j,k));
 
-
-
-
+X_ijk_0_rule ..                                     sum((i,j,k),x(i,j,k))  =g=  0 ;
+X_ijk_rule ..                                      sum((i,j,k),x(i,j,k))  =e=  1 ;
+Q_k_rule(j,k) ..                               dc(j)*sum((i),x(i,j,k))  =l= cv(k);
+X_ijk_X_jik_rule ..        sum((i,j,k),x(i,j,k))- sum((j,i,k),xx(j,i,k))  =e=  0 ;
+X_ijk__rule ..                                     sum((i,j,k),x(i,j,k))  =l=  1 ;
+W_i_rule(i) ..                                  sum(j,dc(j) * ad(i,j))  =l= cd(i);
+X_uk_rule(u,i,j) ..                sum(k,ux(i,u,k) + xu(u,j,k)) - ad(i,j)  =l=  1 ;
 
 
 Model mdvrp / obj /;
 
-solve mdvrp minimizing z using mip;
+solve mdvrp using mip minimizing z;
 
-display x.l;
+display x.l, z.l;
 
