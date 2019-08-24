@@ -137,10 +137,11 @@ W_i_rule(i) ..                                  sum(j,dc(j) * ad(i,j))  =l= cd(i
 X_uk_rule(u,i,j) ..                sum(k,ux(i,u,k) + xu(u,j,k)) - ad(i,j)  =l=  1 ;
 
 
-display cd, dc, cv,i,j,k ;
+
 
 Model mdvrp / obj /;
 
 solve mdvrp minimizing z using mip;
 
+display x.l; 
 
