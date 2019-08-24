@@ -1,6 +1,6 @@
 $eolCom //
 
-option optCr = 0, limRow = 0, limCol = 0, solPrint = off;
+option optCr = 0, limRow = 0, limCol = 0, solPrint = on;
 
 Sets
 i 'depositos'
@@ -143,5 +143,5 @@ Model mdvrp / obj /;
 
 solve mdvrp minimizing z using mip;
 
-display x.l; 
+display x.l;
 
