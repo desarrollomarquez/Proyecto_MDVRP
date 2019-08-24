@@ -1,6 +1,6 @@
 $eolCom //
 
-option optCr = 0, limRow = 0, limCol = 0, solPrint = on;
+option optCr = 0.00001, limRow = 0, limCol = 0, solPrint = on;
 
 Sets
 i 'depositos'
@@ -109,7 +109,7 @@ Free Variable
 
 
 Binary Variable
-       x(i,j,k)
+       x(i,j,k)=1
        xx(j,i,k)
        ad(i,j)
        ux(i,u,k)
