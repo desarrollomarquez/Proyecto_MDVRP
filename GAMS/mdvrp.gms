@@ -109,7 +109,7 @@ Free Variable
 
 
 Binary Variable
-       x(i,j,k)=1
+       x(i,j,k)
        xx(j,i,k)
        ad(i,j)
        ux(i,u,k)
