@@ -1,6 +1,6 @@
 $eolCom //
 
-option optCr = 0.00001, limRow = 0, limCol = 0, solPrint = off;
+option optCr = 0.00001, limRow = 0, limCol = 0, solPrint = on;
 
 Sets
 i 'depositos'
@@ -104,15 +104,18 @@ Free Variable
        ui(i,k)
        uj(j,k)
 
+Positive Variable
+       x(i,j)
+
 Binary Variables
-       x(i,j,k)
+
        xx(j,i,k)
        ad(i,j)
        ux(i,u,k)
        xu(u,j,k);
 
 
-Equation obj
+Equation Obj
          X_ijk_0_rule 'restriccion > 0'
          X_ijk_rule 'Cada cliente j debe ser asignado a un vehiculo k'
          Q_k_rule(j,k) 'Capacidad del conjunto de vehiculos k'
@@ -122,15 +125,8 @@ Equation obj
          X_uk_rule(u,i,j) 'Garantiza asignacion de cliente j si transita por depositos i'
          U_ij_rule(i,j,k) 'Garantiza la eliminacion de SubTours';
 
-obj ..                                         z =e= sum((i,j,k),c(i,j)*x(i,j,k));
+Obj ..                                         z =e= sum((i,j),c(i,j)*x(i,j));
 
-X_ijk_0_rule ..                                     sum((i,j,k),x(i,j,k))  =g=  0 ;
-X_ijk_rule ..                                      sum((i,j,k),x(i,j,k))  =e=  1 ;
-Q_k_rule(j,k) ..                               dc(j)*sum((i),x(i,j,k))  =l= cv(k);
-X_ijk_X_jik_rule ..        sum((i,j,k),x(i,j,k))- sum((j,i,k),xx(j,i,k))  =e=  0 ;
-X_ijk__rule ..                                     sum((i,j,k),x(i,j,k))  =l=  1 ;
-W_i_rule(i) ..                                  sum(j,dc(j) * ad(i,j))  =l= cd(i);
-X_uk_rule(u,i,j) ..                sum(k,ux(i,u,k) + xu(u,j,k)) - ad(i,j)  =l=  1 ;
 
 
 Model mdvrp / obj /;
