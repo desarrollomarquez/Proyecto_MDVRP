@@ -5,10 +5,10 @@ J       ZONAS /CATAL, NORTE, NOROE, LEVAN, CENTR, SUR/
 
 TABLE C(I,J)    COSTES VARIABLES DE DISTRIBUCION Y TRANSPORTE
               CATAL     NORTE     NOROE     LEVAN     CENTR     SUR
-BARNA         10        62        110        35        62        100
-BILBAO        62        10         63        63        40         86
-MADRID        62        40         60        35         7         54
-VALENC        35        63         96        10        35         67;
+BARNA         0.010     0.062     0.0110     0.035    0.062     0.0100
+BILBAO        0.062     0.010     0.063      0.063    0.040     0.086
+MADRID        0.062     0.040     0.060      0.035    0.07      0.054
+VALENC        0.035     0.063     0.096      0.010    0.035     0.067;
 
 
 SET M(I,J) MATRIX DE COSTOS;
