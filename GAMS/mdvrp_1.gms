@@ -10,7 +10,7 @@ BILBAO        62        10         63        63        40         86
 MADRID        62        40         60        35         7         54
 VALENC        35        63         96        10        35         67;
 
-C(I,J)$(X(I,J) > 0.5) = yes;
+
 
 
 PARAMETER F(I) COSTES FIJOS
@@ -56,9 +56,9 @@ EQUATIONS
 OBJ;
 
 
-OBJ..   FO =E= SUM(LT(I,J), C(I,J)*X(I,J));
+OBJ..   FO =E= SUM((I,J), C(I,J)*X(I,J));
 
 
 MODEL LOCALIZ /ALL/;
 SOLVE LOCALIZ USING MIP MINIZING FO;
-DISPLAY X.L, Y.L,  Y.L;
+DISPLAY X.L;
