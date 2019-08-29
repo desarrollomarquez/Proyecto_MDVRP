@@ -11,6 +11,8 @@ MADRID        62        40         60        35         7         54
 VALENC        35        63         96        10        35         67;
 
 
+SET M(I,J) MATRIX DE COSTOS;
+M(I,J)$(C(I,J)> 0.003)= YES ;
 
 
 PARAMETER F(I) COSTES FIJOS
