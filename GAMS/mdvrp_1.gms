@@ -63,7 +63,7 @@ OBJ
 R1;
 
 
-OBJ..   FO =E= SUM(M(I,J), D(I,J)*X(I,J));
+OBJ..   FO =E= SUM(M(I,J), C(I,J)*X(I,J));
 
 R1 ..   SUM(M(I,J), C(I,J)*X(I,J)) =l= 1 ;
 
