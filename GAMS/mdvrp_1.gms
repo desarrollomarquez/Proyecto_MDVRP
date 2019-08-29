@@ -12,7 +12,7 @@ VALENC        0.035     0.063     0.096      0.010    0.035     0.067;
 
 
 SET M(I,J) MATRIX DE COSTOS;
-M(I,J)$(C(I,J)> 0.003)= YES ;
+M(I,J)$(C(I,J) > 0.06 )  = YES ;
 
 
 PARAMETER F(I) COSTES FIJOS
