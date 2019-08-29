@@ -53,11 +53,12 @@ Y;
 
 
 EQUATIONS
-OBJ;
+OBJ
+R1;
 
 
 OBJ..   FO =E= SUM((I,J), C(I,J)*X(I,J));
-
+R1 .. SUM(M(I,J), C(I,J)*X(I,J)) =l= 1 ; 
 
 MODEL LOCALIZ /ALL/;
 SOLVE LOCALIZ USING MIP MINIZING FO;
