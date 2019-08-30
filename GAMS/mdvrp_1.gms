@@ -1,5 +1,7 @@
-$TITLE PROBLEMA DE LOCALIZACIONOPTION LIMROW=100;OPTION LIMCOL =100;OPTIONS OPTCR = 0.01;
-SCALAR CONT  CONTADOR PARA ITERAR
+$eolCom //
+
+OPTION optCr = 0, limRow = 0, limCol = 0, solPrint = on, LP = CPLEX ;
+
 
 SET
 I       FABRICAS /BARNA,BILBAO,MADRID,VALENC/
@@ -7,28 +9,16 @@ J       ZONAS /CATAL, NORTE, NOROE, LEVAN, CENTR, SUR/
 
 TABLE D(I,J)    DISTANCES VARIABLES DE DISTRIBUCION Y TRANSPORTE
               CATAL     NORTE     NOROE     LEVAN     CENTR     SUR
-BARNA         0.010     0.062     0.0110     0.035    0.062     0.0100
-BILBAO        0.062     0.010     0.063      0.063    0.040     0.086
-MADRID        0.062     0.040     0.060      0.035    0.07      0.054
-VALENC        0.035     0.063     0.096      0.010    0.035     0.067;
+BARNA         10        62        110        35        62       100
+BILBAO        62        10         63        63        40        86
+MADRID        62        40         60        35        70        54
+VALENC        35        63         96        10        35        67;
 
-
-SET M(I,J) MATRIX DE DISTANCIAS;
-M(I,J)$(D(I,J) > 0.06 )   = 1 ;
-
-SCALAR CVK  COSTO DE UN VEHICULO POR KILOMETRO
-/0.03/ ;
-
-PARAMETER
-C(I,J);
-C(I,J) = D(I,J)*CVK;
-
-
-PARAMETER F(I) COSTES FIJOS
-/BARNA   100000
- BILBAO  100000
- MADRID   80000
- VALENC  100000/;
+PARAMETER CA(I) CAPACIDAD DE LAS FABRICAS
+/BARNA   1000
+ BILBAO  1000
+ MADRID  1000
+ VALENC  1000/;
 
 PARAMETER DZ(J) DEMANDA DE LA ZONAS
 /CATAL   480
@@ -38,38 +28,33 @@ PARAMETER DZ(J) DEMANDA DE LA ZONAS
  CENTR   598
  SUR     326/;
 
-PARAMETER CA(I) CAPACIDAD DE LAS FABRICAS
-/BARNA   1000
- BILBAO  1000
- MADRID  1000
- VALENC  1000/;
+SET M(I,J) MATRIX DE DISTANCIAS;
+M(I,J)$(D(I,J) > 0.0 )   = YES ;
 
-PARAMETER CI(I) CAPACIDAD INICIAL
-/BARNA   500
- BILBAO    0
- MADRID  700
- VALENC    0/;
+SCALAR CVK  COSTO DE UN VEHICULO POR KILOMETRO
+/0.03/ ;
 
-VARIABLES
-FO
-X(I,J)
-Y(I);
+PARAMETER
+C(I,J);
+C(I,J) = D(I,J)*CVK;
+
+FREE VARIABLES
+Z;
 
 BINARY VARIABLE
-X
-Y;
+X(I,J);
 
 
 EQUATIONS
 OBJ
-R1;
+X_ij_rule 'Cada zona j debe ser asignado a un fabricante'
+Q_rule(I,J) 'Capacidad del conjunto de fabricas ';
 
 
-OBJ..   FO =E= SUM(M(I,J), C(I,J)*X(I,J));
-
-R1 ..   SUM(M(I,J), C(I,J)*X(I,J)) =l= 1 ;
-
+OBJ..                                            Z =E= SUM(M(I,J), C(I,J)*X(I,J));
+X_ij_rule ..                                          SUM(M(I,J),X(I,J))  =e=  1 ;
+Q_rule(I,J) ..                                   DZ(J)*SUM(M(I,J),X(I,J))  =l= CA(I);
 
 MODEL LOCALIZ /ALL/;
-SOLVE LOCALIZ USING MIP MINIZING FO;
-DISPLAY M, FO.L;
+SOLVE LOCALIZ MINIZING Z USING MIP ;
+DISPLAY M;
