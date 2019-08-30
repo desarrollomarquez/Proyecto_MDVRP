@@ -14,6 +14,16 @@ BILBAO        62        10         63        63        40        86
 MADRID        62        40         60        35        70        54
 VALENC        35        63         96        10        35        67;
 
+TABLE DD(J,I)    DISTANCES VARIABLES DE DISTRIBUCION Y TRANSPORTE
+              BARNA    BILBAO     MADRID    VALENC
+CATAL          10        62        62        35
+NORTE          62        10        40        63
+NOROE          110       63        60        96
+LEVAN          35        63        35        10
+CENTR          62        40        70        35
+SUR            100       86        54        67;
+
+
 PARAMETER CA(I) CAPACIDAD DE LAS FABRICAS
 /BARNA   1000
  BILBAO  1000
