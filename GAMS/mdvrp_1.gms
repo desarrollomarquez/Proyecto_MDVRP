@@ -61,12 +61,14 @@ X(I,J);
 EQUATIONS
 OBJ
 X_ij_rule 'Cada zona j debe ser asignado a un fabricante'
-Q_rule(I,J) 'Capacidad del conjunto de fabricas ';
+Q_rule(I,J) 'Capacidad del conjunto de fabricas '
+X_ij_X_ji_rule 'Conservacion de Flujos';
 
 
 OBJ..                                            Z =E= SUM(M(I,J), C(I,J)*X(I,J));
 X_ij_rule ..                                          SUM(M(I,J),X(I,J))  =e=  1 ;
 Q_rule(I,J) ..                                   DZ(J)*SUM(M(I,J),X(I,J))  =l= CA(I);
+X_ij_X_ji_rule ..                   SUM(M(I,J),X(I,J)) - SUM(MM(J,I),XX(J,I))  =e=  0 ;  
 
 MODEL LOCALIZ /ALL/;
 SOLVE LOCALIZ MINIZING Z USING MIP ;
