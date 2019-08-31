@@ -43,6 +43,7 @@ PARAMETER DZ(J) DEMANDA DE LA ZONAS
 SET M(I,J) MATRIX DE DISTANCIAS;
 M(I,J)$(D(I,J) > 0.0 )   = YES ;
 
+
 SET MM(J,I) MATRIX DE DISTANCIAS TRASPUESTA;
 MM(J,I)$(DD(J,I) > 0.0 )   = YES ;
 
@@ -76,9 +77,10 @@ X_u_rule(U,I,J) 'Garantiza asignacion de zona j si transita por las fabricas i';
 OBJ..                                            Z =E= SUM(M(I,J), C(I,J)*X(I,J));
 X_ij_rule ..                                          SUM(M(I,J),X(I,J))  =e=  1 ;
 Q_rule(I,J) ..                                   DZ(J)*SUM(M(I,J),X(I,J))  =l= CA(I);
-X_ij__rule ..                                              SUM(M(I,J),X(I,J))  =l=  1 ;
-X_u_rule(U,I,J) ..       SUM(M(I,J),UX(I,U)) + SUM(M(I,J),XU(U,J)) - AD(I,J)   =l=  1 ;
 X_ij_X_ji_rule ..                   SUM(M(I,J),X(I,J)) - SUM(MM(J,I),XX(J,I))  =e=  0 ;
+X_ij__rule ..                                              SUM(M(I,J),X(I,J))  =l=  1 ;
+X_u_rule(U,I,J) ..       UX(I,U) + XU(U,J) - AD(I,J)   =l=  1 ;
+
 
 
 MODEL LOCALIZ /ALL/;
