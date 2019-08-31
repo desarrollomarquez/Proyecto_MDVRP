@@ -64,7 +64,8 @@ OBJ
 X_ij_rule 'Cada zona j debe ser asignado a un fabricante'
 Q_rule(I,J) 'Capacidad del conjunto de fabricas '
 X_ij_X_ji_rule 'Conservacion de Flujos'
-X_ij__rule 'Garantiza que cada fabrica atienda almenos una unica ruta';
+X_ij__rule 'Garantiza que cada fabrica atienda almenos una unica ruta'
+X_u_rule(U,I,J) 'Garantiza asignacion de zona j si transita por las fabricas i';
 
 
 OBJ..                                            Z =E= SUM(M(I,J), C(I,J)*X(I,J));
