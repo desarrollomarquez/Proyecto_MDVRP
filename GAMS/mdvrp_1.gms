@@ -73,6 +73,8 @@ X_ij_rule ..                                          SUM(M(I,J),X(I,J))  =e=  1
 Q_rule(I,J) ..                                   DZ(J)*SUM(M(I,J),X(I,J))  =l= CA(I);
 X_ij_X_ji_rule ..                   SUM(M(I,J),X(I,J)) - SUM(MM(J,I),XX(J,I))  =e=  0 ;
 X_ij__rule ..                                              SUM(M(I,J),X(I,J))  =l=  1 ;
+X_u_rule(U,I,J) ..                sum(k,ux(i,u,k) + xu(u,j,k)) - ad(i,j)  =l=  1 ;
+
 
 MODEL LOCALIZ /ALL/;
 SOLVE LOCALIZ MINIZING Z USING MIP ;
