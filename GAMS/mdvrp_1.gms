@@ -48,7 +48,7 @@ SET MM(J,I) MATRIX DE DISTANCIAS TRASPUESTA;
 MM(J,I)$(DD(J,I) > 0.0 )   = YES ;
 
 SCALAR CVK  COSTO DE UN VEHICULO POR KILOMETRO
-/0.03/ ;
+/2/ ;
 
 PARAMETER
 C(I,J);
@@ -79,7 +79,7 @@ X_ij_rule ..                                             SUM(M(I,J),X(I,J))  =e=
 CA_rule(I,J) ..                                   SUM(M(I,J),DZ(J)*AD(I,J))  =l= CA(I);
 X_ij_X_ji_rule ..                  SUM(M(I,J),X(I,J)) - SUM(MM(J,I),XX(J,I))  =e=  0 ;
 X_ij__rule ..                                             SUM(M(I,J),X(I,J))  =l=  1 ;
-X_u_rule(U,I,J) ..                             SUM(M(I,J),UX(I,U) + XU(U,J)) - AD(I,J)   =l=  1 ;
+X_u_rule(U,I,J) ..                  SUM(M(I,J),UX(I,U) + XU(U,J)) - AD(I,J)   =l=  1 ;
 
 
 
