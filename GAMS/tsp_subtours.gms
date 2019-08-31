@@ -47,3 +47,24 @@ colsum(j).. sum(i, x(i,j)) =e= 1;
 * exclude diagonal
 *
 x.fx(ii,ii) = 0;
+
+
+Set ij(ii,jj) 'exclude first row and column';
+ij(ii,jj) = ord(ii) > 1 and ord(jj) > 1;
+
+Variable u(ii)     'subtour elimination strategy 3';
+
+Equation se(ii,jj) 'subtour elimination constraints';
+
+se(ij(i,j)).. u(i) - u(j) + card(i)*x(i,j) =l= card(i) - 1;
+
+Model tsp / objective, rowsum, colsum, se /;
+
+* Try a small problem first - first six cities
+i(ii) = ord(ii) <= 6;
+
+option optCr = 0.05;
+
+solve tsp min z using mip;
+
+display x.l;
