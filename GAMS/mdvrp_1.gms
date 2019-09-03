@@ -1,6 +1,6 @@
 $eolCom //
 
-OPTION optCr = 0, limRow = 0, limCol = 0, solPrint = OFF, LP = CPLEX ;
+OPTION optCr = 0, limRow = 0, limCol = 0, solPrint = ON, LP = CPLEX ;
 
 
 SET
@@ -87,7 +87,7 @@ CA_rule(I,J) ..                                   SUM(M(I,J),DZ(J)*AD(I,J))  =l=
 X_ij_X_ji_rule ..                  SUM(M(I,J),X(I,J)) - SUM(MM(J,I),XX(J,I))  =e=  0 ;
 X_ij__rule ..                                             SUM(M(I,J),X(I,J))  =l=  1 ;
 X_u_rule(U,I,J) ..                  SUM(M(I,J),UX(I,U) + XU(U,J)) - AD(I,J)   =l=  1 ;
-U_u_rule(U,I,J) ..                  UI(I) - UU(U) + CARD(I)*X(I,J) =l= CARD(I) - 1;
+U_u_rule(U,I,J) ..                     UI(I) - UU(U) + CARD(I)*X(I,J) =l= CARD(I) - 1;
 
 
 
