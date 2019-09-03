@@ -1,6 +1,6 @@
 $eolCom //
 
-OPTION optCr = 0, limRow = 0, limCol = 0, solPrint = on, LP = CPLEX ;
+OPTION optCr = 0, limRow = 0, limCol = 0, solPrint = OFF, LP = CPLEX ;
 
 
 SET
@@ -95,4 +95,4 @@ U_u_rule(U,I,J) ..                  UI(I) - UU(U) + CARD(I)*X(I,J) =l= CARD(I) -
 
 MODEL LOCALIZ /ALL/;
 SOLVE LOCALIZ MINIZING Z USING MIP ;
-DISPLAY M;
+DISPLAY M, MU;
