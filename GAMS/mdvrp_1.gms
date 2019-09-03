@@ -48,7 +48,7 @@ SET MM(J,I) MATRIX DE DISTANCIAS TRASPUESTA;
 MM(J,I)$(DD(J,I) > 0.0 )   = YES ;
 
 SET MU(I,U) MATRIX DE DISTANCIAS PARA SUBTOURES;
-MU(I,U) = ORD(I) > 1 and ORD(U) > 1; 
+MU(I,U) = ORD(I) > 1 and ORD(U) > 1;
 
 
 SCALAR CVK  COSTO DE UN VEHICULO POR KILOMETRO
@@ -76,7 +76,8 @@ X_ij_rule 'Cada zona j debe ser asignado a un fabricante'
 CA_rule(I,J) 'Capacidad del conjunto de fabricas '
 X_ij_X_ji_rule 'Conservacion de Flujos'
 X_ij__rule 'Garantiza que cada fabrica atienda almenos una unica ruta'
-X_u_rule(U,I,J) 'Garantiza asignacion de zona j si transita por las fabricas i';
+X_u_rule(U,I,J) 'Garantiza asignacion de zona j si transita por las fabricas i'
+U_u_rule(U,I,J) 'Garantiza la eliminacion de SubTours';;
 
 
 OBJ..                                               Z =E= SUM(M(I,J), C(I,J)*X(I,J));
@@ -85,6 +86,7 @@ CA_rule(I,J) ..                                   SUM(M(I,J),DZ(J)*AD(I,J))  =l=
 X_ij_X_ji_rule ..                  SUM(M(I,J),X(I,J)) - SUM(MM(J,I),XX(J,I))  =e=  0 ;
 X_ij__rule ..                                             SUM(M(I,J),X(I,J))  =l=  1 ;
 X_u_rule(U,I,J) ..                  SUM(M(I,J),UX(I,U) + XU(U,J)) - AD(I,J)   =l=  1 ;
+U_u_rule(U,I,J) ..                  UU(I) - UU(U) + CARD(I)*X(I,J) =l= CARD(I) - 1;
 
 
 
