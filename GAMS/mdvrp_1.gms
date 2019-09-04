@@ -62,7 +62,7 @@ C(I,J) = D(I,J)*CVK;
 
 FREE VARIABLES
 Z
-UI(I)
+UJ(J)
 UU(U);
 
 BINARY VARIABLE
@@ -81,16 +81,16 @@ CA_rule(I,J) 'Capacidad del conjunto de fabricas '
 X_ij_X_ji_rule 'Conservacion de Flujos'
 X_ij__rule 'Garantiza que cada fabrica atienda almenos una unica ruta'
 X_u_rule(U,I,J) 'Garantiza asignacion de zona j si transita por las fabricas i'
-U_u_rule(U,I,J) 'Garantiza la eliminacion de SubTours';;
+U_u_rule(MU(J,U)) 'Garantiza la eliminacion de SubTours';;
 
 
-OBJ..                                               Z =E= SUM(M(I,J), C(I,J)*X(I,J));
-X_ij_rule ..                                             SUM(M(I,J),X(I,J))  =e=  1 ;
-CA_rule(I,J) ..                                   SUM(M(I,J),DZ(J)*AD(I,J))  =l= CA(I);
+OBJ..                                                Z =E= SUM(M(I,J), C(I,J)*X(I,J));
+X_ij_rule ..                                              SUM(M(I,J),X(I,J))  =e=  1 ;
+CA_rule(I,J) ..                                  SUM(M(I,J),DZ(J)*AD(I,J))  =l= CA(I);
 X_ij_X_ji_rule ..                  SUM(M(I,J),X(I,J)) - SUM(MM(J,I),XX(J,I))  =e=  0 ;
 X_ij__rule ..                                             SUM(M(I,J),X(I,J))  =l=  1 ;
 X_u_rule(U,I,J) ..                  SUM(M(I,J),UX(I,U) + XU(U,J)) - AD(I,J)   =l=  1 ;
-U_u_rule(U,I,J) ..           UI(I) - UU(U) + CARD(I)*XXX(J,U) =l= CARD(I) - 1;
+U_u_rule(MU(J,U)) ..                   UI(I) - UU(U) + CARD(I)*XXX(J,U) =l= CARD(I) - 1;
 
 
 
