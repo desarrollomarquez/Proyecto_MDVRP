@@ -16,7 +16,7 @@ BILBAO        62        10         63        63        40        86
 MADRID        62        40         60        35        70        54
 VALENC        35        63         96        10        35        67;
 
-TABLE DD(J,I)    DISTANCES VARIABLES DE DISTRIBUCION Y TRANSPORTE
+TABLE DD(J,I)    DISTANCES VARIABLES DE DISTRIBUCION Y TRANSPORTE - TRASPUESTA
               BARNA    BILBAO     MADRID    VALENC
 CATAL          10        62        62        35
 NORTE          62        10        40        63
