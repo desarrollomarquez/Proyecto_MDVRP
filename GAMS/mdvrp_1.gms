@@ -62,7 +62,7 @@ MU(J,U)$(JU(J,U) > 0.0 )   = YES ;
 
 
 SCALAR CVK  COSTO DE UN VEHICULO POR KILOMETRO
-/2/ ;
+/5/ ;
 
 PARAMETER
 C(I,J);
@@ -92,13 +92,13 @@ X_u_rule(U,I,J) 'Garantiza asignacion de zona j si transita por las fabricas i'
 U_u_rule(J,U) 'Garantiza la eliminacion de SubTours';;
 
 
-OBJ..                                                Z =E= SUM(M(I,J), C(I,J)*X(I,J));
+OBJ..                                               Z =E= SUM(M(I,J), C(I,J)*X(I,J)) ;
 X_ij_rule ..                                              SUM(M(I,J),X(I,J))  =e=  1 ;
-CA_rule(I,J) ..                                  SUM(M(I,J),DZ(J)*AD(I,J))  =l= CA(I);
+CA_rule(I,J) ..                                 SUM(M(I,J),DZ(J)*AD(I,J))  =l= CA(I) ;
 X_ij_X_ji_rule ..                  SUM(M(I,J),X(I,J)) - SUM(MM(J,I),XX(J,I))  =e=  0 ;
 X_ij__rule ..                                             SUM(M(I,J),X(I,J))  =l=  1 ;
 X_u_rule(U,I,J) ..                  SUM(M(I,J),UX(I,U) + XU(U,J)) - AD(I,J)   =l=  1 ;
-U_u_rule(MU(J,U)) ..                  UJ(J) - UU(U) + CARD(J)*XXX(J,U) =l= CARD(J) - 1;
+U_u_rule(MU(J,U)) ..                UJ(J) - UU(U) + CARD(J)*XXX(J,U) =l= CARD(J) - 1 ;
 
 
 
