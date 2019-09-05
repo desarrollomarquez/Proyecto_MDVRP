@@ -30,9 +30,9 @@ TABLE JU(J,U)    DISTANCES VARIABLES DE DISTRIBUCION Y TRANSPORTE ENTRE ZONAS
 CATAL           0        40        35        35         45       32
 NORTE          40         0        30        45         25      100
 NOROE          35        30         0        65         50       45
-LEVAN          35        45        65         0         28       70
-CENTR          45        25        50        28          0       60
-SUR            32       100        45        70         60        0;
+LEVAN          35        55        65         0         28       70
+CENTR          45        30        70        28          0       60
+SUR            32        90        45        70         60        0;
 
 PARAMETER CA(I) CAPACIDAD DE LAS FABRICAS
 /BARNA   1000
