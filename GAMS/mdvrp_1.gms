@@ -1,6 +1,6 @@
 $eolCom //
 
-OPTION optCr = 0, limRow = 0, limCol = 0, solPrint = OFF, LP = CPLEX ;
+OPTION optCr = 0, limRow = 0, limCol = 0, solPrint = ON, LP = CPLEX ;
 
 
 SET
