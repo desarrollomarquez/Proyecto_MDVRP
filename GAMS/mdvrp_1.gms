@@ -25,12 +25,14 @@ LEVAN          35        63        35        10
 CENTR          62        40        70        35
 SUR            100       86        54        67;
 
-TABLE D(I,J)    DISTANCES VARIABLES DE DISTRIBUCION Y TRANSPORTE ENTRE ZONAS
+TABLE JU(J,U)    DISTANCES VARIABLES DE DISTRIBUCION Y TRANSPORTE ENTRE ZONAS
               CATAL     NORTE     NOROE     LEVAN     CENTR     SUR
-BARNA         10        62        110        35        62       100
-BILBAO        62        10         63        63        40        86
-MADRID        62        40         60        35        70        54
-VALENC        35        63         96        10        35        67;
+CATAL           0        40        35        35         45       32
+NORTE          40         0        30        45         25      100
+NOROE          35        30         0        65         50       45
+LEVAN          35        45        65         0         28       70
+CENTR          45        25        50        28          0       60
+SUR            32       100        45        70         60        0;
 
 PARAMETER CA(I) CAPACIDAD DE LAS FABRICAS
 /BARNA   1000
