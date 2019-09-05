@@ -98,7 +98,7 @@ CA_rule(I,J) ..                                  SUM(M(I,J),DZ(J)*AD(I,J))  =l= 
 X_ij_X_ji_rule ..                  SUM(M(I,J),X(I,J)) - SUM(MM(J,I),XX(J,I))  =e=  0 ;
 X_ij__rule ..                                             SUM(M(I,J),X(I,J))  =l=  1 ;
 X_u_rule(U,I,J) ..                  SUM(M(I,J),UX(I,U) + XU(U,J)) - AD(I,J)   =l=  1 ;
-U_u_rule(MU(J,U)) ..                   UJ(J) - UU(U) + CARD(J)*XXX(J,U) =l= CARD(J) - 1;
+U_u_rule(MU(J,U)) ..                  UJ(J) - UU(U) + CARD(J)*XXX(J,U) =l= CARD(J) - 1;
 
 
 
@@ -106,4 +106,4 @@ U_u_rule(MU(J,U)) ..                   UJ(J) - UU(U) + CARD(J)*XXX(J,U) =l= CARD
 
 MODEL LOCALIZ /ALL/;
 SOLVE LOCALIZ MINIZING Z USING MIP ;
-DISPLAY XXX.l,  UJ.l, UU.l;
+DISPLAY MU;
