@@ -35,10 +35,10 @@ CENTR          45        30        70        28          0       60
 SUR            32        90        45        70         60        0;
 
 PARAMETER CA(I) CAPACIDAD DE LAS FABRICAS
-/BARNA   1000
- BILBAO  1000
- MADRID  1000
- VALENC  1000/;
+/BARNA   500
+ BILBAO  500
+ MADRID  500
+ VALENC  500/;
 
 PARAMETER DZ(J) DEMANDA DE LA ZONAS
 /CATAL   480
