@@ -106,4 +106,4 @@ U_u_rule(MU(J,U)) ..                UJ(J) - UU(U) + CARD(J)*XXX(J,U) =l= CARD(J)
 
 MODEL LOCALIZ /ALL/;
 SOLVE LOCALIZ MINIZING Z USING MIP ;
-DISPLAY MU;
+DISPLAY MU,CA_rule.l;
