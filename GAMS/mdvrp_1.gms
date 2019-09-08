@@ -101,9 +101,6 @@ X_u_rule(U,I,J) ..                  SUM(M(I,J),UX(I,U) + XU(U,J)) - AD(I,J)   =l
 U_u_rule(MU(J,U)) ..                UJ(J) - UU(U) + CARD(J)*XXX(J,U) =l= CARD(J) - 1 ;
 
 
-
-
-
 MODEL LOCALIZ /ALL/;
 SOLVE LOCALIZ MINIZING Z USING MIP ;
 DISPLAY MU,CA_rule.l;
