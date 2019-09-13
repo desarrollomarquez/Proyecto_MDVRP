@@ -75,7 +75,8 @@ C(I,J) = D(I,J)*CVK;
 FREE VARIABLES
 Z
 UJ(J)
-UU(U);
+UU(U)
+YY(I,J);;
 
 BINARY VARIABLE
 X(I,J)
