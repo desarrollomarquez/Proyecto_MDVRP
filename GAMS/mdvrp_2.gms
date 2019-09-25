@@ -86,5 +86,5 @@ Capacidad
 
 Fobj ..               FO =e= SUM((I,J,K),C(I,J)*F(I,J,K)) + SUM((J,U,K),CO(J,U)*X(J,U,K)) + SUM((I,J,K),C(I,J)*L(J,I,K));
 Cobertura(J) ..       SUM((I,K),F(I,J,K)) + SUM((U,K),X(J,U,K)) + SUM((I,K),L(J,I,K)) =g= 1;
-Capacidad(K) ..       SUM(J,DZ(J)*)
+Capacidad(K) ..       SUM(J,DZ(J))
 
