@@ -87,8 +87,8 @@ vehiculoruta(k) .. sum((d,z),x(d,z,k)) =l= 1 ;
 capacidaddepositos(d) ..  sum(z,dc(z)*y(d,z)) =l=  CD(d) ;
 relacion(d,z,k) .. -y(d,z) + sum(n,x(n,z,k)+x(z,n,k)) =l= 1 ;
 
-model diego /all/;
-solve diego minimizing costototal using mip;
+model mdvrp /all/;
+solve mdvrp minimizing costototal using mip;
 
 
 
