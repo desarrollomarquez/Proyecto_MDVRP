@@ -81,7 +81,7 @@ relacion relacion entre variables
 fo .. costototal =e= sum((i,j,k),C(i,j)*X(i,j,k)) ;
 cobertura(z) .. sum((n,k),X(n,z,k)) =e= 1 ;
 capacidadvehiculos(k) ..  sum((n,z),dc(z)*x(n,z,k)) =l= CV(k) ;
-subtoures(l,j,k) .. U(l)- U(j) + 4*x(l,j,k) =l= 3;
+subtoures(i,j,k) .. U(i)- U(j) + 4*x(i,j,k) =l= 3;
 flujo(n,k) .. sum(j,X(j,n,k)) =e= sum(j,X(n,j,k)) ;
 vehiculoruta(k) .. sum((d,z),x(d,z,k)) =l= 1 ;
 capacidaddepositos(d) ..  sum(z,dc(z)*y(d,z)) =l=  CD(d) ;
