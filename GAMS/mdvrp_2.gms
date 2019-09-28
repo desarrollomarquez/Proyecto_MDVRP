@@ -55,7 +55,7 @@ variables
 
 x(i,j,k) 1 si el nodo i precede al nodo j en la ruta k
 y(d,z) 1 si el deposito d atiende la zona z
-U(l,k) subtoures en la ruta k
+U(l) subtoures en la ruta k
 costototal valor de la fo;
 
 binary variables x, y;
@@ -81,7 +81,7 @@ relacion relacion entre variables
 fo .. costototal =e= sum((i,j,k),C(i,j)*X(i,j,k)) ;
 cobertura(z) .. sum((n,k),X(n,z,k)) =e= 1 ;
 capacidadvehiculos(k) ..  sum((n,z),dc(z)*x(n,z,k)) =l= CV(k) ;
-subtoures(l,j,k) .. U(l,k)- U(j,k) + 4*x(l,j,k) =l= 3;
+subtoures(l,j,k) .. U(l)- U(j) + 4*x(l,j,k) =l= 3;
 flujo(n,k) .. sum(j,X(j,n,k)) =e= sum(j,X(n,j,k)) ;
 vehiculoruta(k) .. sum((d,z),x(d,z,k)) =l= 1 ;
 capacidaddepositos(d) ..  sum(z,dc(z)*y(d,z)) =l=  CD(d) ;
