@@ -1,6 +1,6 @@
 $eolCom //
 
-OPTION optCr = 0, limRow = 0, limCol = 0, solPrint = ON, LP = CPLEX ;
+OPTION optCr = 0, limRow = 0, limCol = 0, solPrint = OFF, LP = CPLEX ;
 
 SET
 N       NODOSDEPOCLIENTES /BARNA, BILBAO, MADRID, VALENC, CATAL, NORTE, NOROE, LEVAN, CENTR, SUR/
@@ -88,7 +88,8 @@ capacidaddepositos(d) ..  sum(z,dc(z)*y(d,z)) =l=  CD(d) ;
 relacion(d,z,k) .. -y(d,z) + sum(n,x(n,z,k)+x(z,n,k)) =l= 1 ;
 
 model mdvrp /all/;
-solve mdvrp minimizing costototal using mip;
+solve mdvrp minimizing costototal using mip
+display N;
 
 
 
