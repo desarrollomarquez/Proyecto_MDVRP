@@ -39,10 +39,10 @@ PARAMETER DC(z) DEMANDA DE LOS CLIENTES
  SUR      600  /;
 
 PARAMETER CV(K) CAPACIDAD DE VEHICULOS
-/CAMION1    5000
- CAMION2    5000
- CAMION3    5000
- CAMION4    5000/;
+/CAMION1    6000
+ CAMION2    6000
+ CAMION3    6000
+ CAMION4    6000/;
 
 SCALAR CVK  COSTO DE UN VEHICULO POR KILOMETRO
 /70/ ;
@@ -69,6 +69,7 @@ equations
 fo funcion objetivo
 cobertura cobertura de cada zona
 capacidadvehiculos capacidad de los vehiculos
+subtoures eliminacion de subtoures
 flujo ecuaciones de flujo
 vehiculoruta  un vehiculo en una sola ruta
 capacidaddepositos no se excede la capacidad de los depositos
@@ -76,9 +77,11 @@ relacion relacion entre variables
 
 ;
 
+
 fo .. costototal =e= sum((i,j,k),C(i,j)*X(i,j,k)) ;
 cobertura(z) .. sum((n,k),X(n,z,k)) =e= 1 ;
 capacidadvehiculos(k) ..  sum((n,z),dc(z)*x(n,z,k)) =l= CV(k) ;
+subtoures(l,j,k) .. U(l,k)- U(j,k) + 4*x(l,j,k) =l= 3;
 flujo(n,k) .. sum(j,X(j,n,k)) =e= sum(j,X(n,j,k)) ;
 vehiculoruta(k) .. sum((d,z),x(d,z,k)) =l= 1 ;
 capacidaddepositos(d) ..  sum(z,dc(z)*y(d,z)) =l=  CD(d) ;
