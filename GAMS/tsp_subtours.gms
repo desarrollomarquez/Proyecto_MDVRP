@@ -67,4 +67,4 @@ option optCr = 0.05;
 
 solve tsp min z using mip;
 
-display x.l,ij;
+display i,ii;
