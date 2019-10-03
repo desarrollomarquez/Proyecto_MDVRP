@@ -55,7 +55,7 @@ variables
 
 x(i,j,k) 1 si el nodo i precede al nodo j en la ruta k
 y(d,z) 1 si el deposito d atiende la zona z
-U(l,k) subtoures en la ruta k
+U(l) subtoures en la ruta k
 costototal valor de la fo;
 
 binary variables x, y;
