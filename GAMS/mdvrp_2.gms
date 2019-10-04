@@ -90,7 +90,7 @@ subtoures(i,j,k) .. U(i,k)- U(j,k) + 4*x(i,j,k) =l= 3;
 
 model mdvrp /all/;
 solve mdvrp minimizing costototal using mip
-display L;
+display L,I,J;
 
 
 
