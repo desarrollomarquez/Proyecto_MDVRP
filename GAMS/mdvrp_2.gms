@@ -75,9 +75,7 @@ capacidaddepositos no se excede la capacidad de los depositos
 relacion relacion entre variables
 subtoures eliminacion de subtoures
 
-
 ;
-
 
 fo .. costototal =e= sum((i,j,k),C(i,j)*X(i,j,k)) ;
 cobertura(z) .. sum((n,k),X(n,z,k)) =e= 1 ;
@@ -90,7 +88,7 @@ subtoures(i,j,k) .. U(i,k)- U(j,k) + 4*x(i,j,k) =l= 3;
 
 model mdvrp /all/;
 solve mdvrp minimizing costototal using mip
-display L;
+display L,I;
 
 
 
