@@ -55,7 +55,7 @@ variables
 
 x(i,j,k) 1 si el nodo i precede al nodo j en la ruta k
 y(d,z) 1 si el deposito d atiende la zona z
-U(l) subtoures en la ruta k
+U(l,k) subtoures en la ruta k
 costototal valor de la fo;
 
 binary variables x, y;
@@ -84,7 +84,7 @@ flujo(n,k) .. sum(j,X(j,n,k)) =e= sum(j,X(n,j,k)) ;
 vehiculoruta(k) .. sum((d,z),x(d,z,k)) =l= 1 ;
 capacidaddepositos(d) ..  sum(z,dc(z)*y(d,z)) =l=  CD(d) ;
 relacion(d,z,k) .. -y(d,z) + sum(n,x(n,z,k)+x(z,n,k)) =l= 1 ;
-subtoures(i,j,k) .. U(i)- U(j) + 4*x(i,j,k) =l= 3;
+subtoures(i,j,k) .. U(i,k)- U(j,k) + 4*x(i,j,k) =l= 3;
 
 model mdvrp /all/;
 solve mdvrp minimizing costototal using mip
