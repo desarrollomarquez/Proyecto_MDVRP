@@ -61,10 +61,10 @@ se(ij(i,j)).. u(i) - u(j) + card(i)*x(i,j) =l= card(i) - 1;
 Model tsp / objective, rowsum, colsum, se /;
 
 * Try a small problem first - first six cities
-i(ii) = ord(ii) <= 10;
+*i(ii) = ord(ii) <= 10;
 
-option optCr = 0.05;
+*option optCr = 0.05;
 
-solve tsp min z using mip;
+*solve tsp min z using mip;
 
-display k;
+*display k;
